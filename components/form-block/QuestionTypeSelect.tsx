@@ -4,26 +4,31 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { 
-  AlignLeft, 
-  TextQuote, 
-  ListChecks, 
-  Hash, 
-  Link2
-} from "lucide-react";
+import { AlignLeft, TextQuote, ListChecks, Hash, Link2 } from "lucide-react";
 
 interface QuestionTypeSelectProps {
   children: React.ReactNode;
   onSelect: (type: string) => void;
+  position?: "start" | "end" | "center";
 }
 
-export default function QuestionTypeSelect({ children, onSelect }: QuestionTypeSelectProps) {
+export default function QuestionTypeSelect({
+  children,
+  onSelect,
+  position ="center",
+}: QuestionTypeSelectProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
-      <DropdownMenuContent align="start" className="w-56">
+
+      <DropdownMenuContent align={position} className="w-56">
+        <DropdownMenuLabel className="text-gray-500 text-sm font-medium text-center w-full py-2">
+          Input Type
+        </DropdownMenuLabel>
+
         <DropdownMenuItem onClick={() => onSelect("short_answer")}>
           <AlignLeft className="mr-2 h-4 w-4" />
           <div className="flex flex-col">

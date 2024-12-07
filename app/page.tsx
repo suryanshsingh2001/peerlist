@@ -1,14 +1,15 @@
-import FormBuilder from "@/components/form-section/FormBuilder";
+"use client";
+import DesignFormHeader from "@/components/layout/design-form-header";
+import DesignFormFooter from "@/components/layout/design-form-footer";
+import FormDesigner from "@/components/form-section/FormDesigner";
 export default function Home() {
   return (
-    <div className="container mx-auto max-w-4xl min-h-screen p-2 border border-red-600">
-      <div
-        className="
-      flex flex-col bg-white rounded-md border border-red-600
-      "
-      >
-        <FormBuilder />
-      </div>
-    </div>
+    <main className="container flex flex-col min-h-screen mx-auto max-w-4xl border border-red-600 rounded-md">
+      <DesignFormHeader />
+
+      <FormDesigner />
+      
+      <DesignFormFooter />
+    </main>
   );
 }

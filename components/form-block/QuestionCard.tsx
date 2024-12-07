@@ -22,10 +22,12 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Question } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import QuestionTypeSelect from "./QuestionTypeSelect";
 
 interface QuestionCardProps {
   question: Question;
@@ -103,38 +105,21 @@ export default function QuestionCard({
                 />
               </div>
               <div className="flex items-center gap-2">
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="hover:bg-transparent flex items-center gap-1"
-                    >
-                      {
-                        questionTypeIcons[
-                          question.type as keyof typeof questionTypeIcons
-                        ]
-                      }
-                      <ChevronDown className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-56">
-                    {Object.entries(questionTypeLabels).map(([type, label]) => (
-                      <DropdownMenuItem
-                        key={type}
-                        onClick={() => handleTypeChange(type)}
-                        className="flex items-center"
-                      >
-                        {
-                          questionTypeIcons[
-                            type as keyof typeof questionTypeIcons
-                          ]
-                        }
-                        <span className="ml-2">{label}</span>
-                      </DropdownMenuItem>
-                    ))}
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                <QuestionTypeSelect onSelect={handleTypeChange} position="center">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="hover:bg-transparent flex items-center gap-1"
+                  >
+                    {
+                      questionTypeIcons[
+                        question.type as keyof typeof questionTypeIcons
+                      ]
+                    }
+                    <ChevronDown className="h-4 w-4" />
+                  </Button>
+                </QuestionTypeSelect>
+
                 <div {...dragHandleProps} className="ml-2">
                   <Grip className="h-5 w-5 cursor-grabbing" />
                 </div>

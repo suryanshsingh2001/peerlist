@@ -1,15 +1,21 @@
-import React, { useState } from 'react';
-import { useFormContext } from '@/context/FormContext';
-import { Button } from '@/components/ui/button';
-import FormHeader from './FormHeader';
-import QuestionCard from '../form-block/QuestionCard';
-import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
-import QuestionTypeSelect from '../form-block/QuestionTypeSelect';
-import { Question } from '@/lib/types';
-import { PlusCircle } from 'lucide-react';
-import FormSubmissions from './FormSubmissions';
+import React, { useState } from "react";
+import { useFormContext } from "@/context/FormContext";
+import { Button } from "@/components/ui/button";
+import FormHeader from "./FormHeader";
+import QuestionCard from "../form-block/QuestionCard";
+import {
+  DragDropContext,
+  Droppable,
+  Draggable,
+  DropResult,
+} from "@hello-pangea/dnd";
+import QuestionTypeSelect from "../form-block/QuestionTypeSelect";
+import { Question } from "@/lib/types";
+import { PlusCircle } from "lucide-react";
+import FormSubmissions from "./FormSubmissions";
+import DesignFormHeader from "../layout/design-form-header";
 
-export default function FormDesigner({ onPreviewClick }: { onPreviewClick: () => void }) {
+export default function FormDesigner() {
   const { questions, setQuestions, formTitle, setFormTitle } = useFormContext();
   const [showSubmissions, setShowSubmissions] = useState(false);
   const [errors, setErrors] = useState<Record<string, boolean>>({});
@@ -33,9 +39,9 @@ export default function FormDesigner({ onPreviewClick }: { onPreviewClick: () =>
   const updateQuestion = (index: number, updatedQuestion: Question) => {
     const newQuestions = [...questions];
     newQuestions[index] = updatedQuestion;
-    setErrors(prev => ({
+    setErrors((prev) => ({
       ...prev,
-      [updatedQuestion.id]: !validateQuestion(updatedQuestion)
+      [updatedQuestion.id]: !validateQuestion(updatedQuestion),
     }));
     setQuestions(newQuestions);
   };
@@ -65,55 +71,49 @@ export default function FormDesigner({ onPreviewClick }: { onPreviewClick: () =>
   };
 
   return (
-    <div className="max-w-3xl mx-auto">
-      <FormHeader
-        title={formTitle}
-        onTitleChange={setFormTitle}
-        onPreviewClick={onPreviewClick}
-        onToggleSubmissions={() => setShowSubmissions(!showSubmissions)}
-        showSubmissions={showSubmissions}
-      />
+    <div className="flex flex-col max-w-4xl mx-2 border border-red-800 p-2">
+      <>
+        <DragDropContext onDragEnd={handleDragEnd}>
+          <Droppable droppableId="questions">
+            {(provided) => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                {questions.map((question, index) => (
+                  <Draggable
+                    key={question.id}
+                    draggableId={question.id}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <div ref={provided.innerRef} {...provided.draggableProps}>
+                        <QuestionCard
+                          question={question}
+                          onUpdate={(updatedQuestion) =>
+                            updateQuestion(index, updatedQuestion)
+                          }
+                          onDelete={() => deleteQuestion(index)}
+                          onDuplicate={() => duplicateQuestion(index)}
+                          dragHandleProps={provided.dragHandleProps}
+                          error={errors[question.id]}
+                        />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
 
-      {showSubmissions ? (
-        <FormSubmissions />
-      ) : (
-        <>
-          <DragDropContext onDragEnd={handleDragEnd}>
-            <Droppable droppableId="questions">
-              {(provided) => (
-                <div {...provided.droppableProps} ref={provided.innerRef}>
-                  {questions.map((question, index) => (
-                    <Draggable key={question.id} draggableId={question.id} index={index}>
-                      {(provided) => (
-                        <div ref={provided.innerRef} {...provided.draggableProps}>
-                          <QuestionCard
-                            question={question}
-                            onUpdate={(updatedQuestion) => updateQuestion(index, updatedQuestion)}
-                            onDelete={() => deleteQuestion(index)}
-                            onDuplicate={() => duplicateQuestion(index)}
-                            dragHandleProps={provided.dragHandleProps}
-                            error={errors[question.id]}
-                          />
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
-
-          <div className="flex justify-center mt-8">
-            <QuestionTypeSelect onSelect={addQuestion}>
-              <Button variant="outline" size="sm">
-                <PlusCircle className="mr-2 h-5 w-5" />
-                Add Question
-              </Button>
-            </QuestionTypeSelect>
-          </div>
-        </>
-      )}
+        <div className="flex justify-center">
+          <QuestionTypeSelect onSelect={addQuestion}>
+            <Button variant="outline" size="sm">
+              <PlusCircle className=" h-5 w-5" />
+              Add Question
+            </Button>
+          </QuestionTypeSelect>
+        </div>
+      </>
     </div>
   );
 }

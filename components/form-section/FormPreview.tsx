@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useFormContext } from '@/context/FormContext';
 import { Button } from '@/components/ui/button';
@@ -8,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
+import { Question } from '@/lib/types';
 
 export default function FormPreview({ onDesginerClick }: { onDesginerClick: () => void }) {
   const { questions, formTitle } = useFormContext();
@@ -37,8 +39,60 @@ export default function FormPreview({ onDesginerClick }: { onDesginerClick: () =
     }));
   };
 
+  const renderQuestionInput = (question: Question) => {
+    switch (question.type) {
+      case 'short_answer':
+        return (
+          <Input
+            value={answers[question.id] || ""}
+            onChange={(e) => handleAnswerChange(question.id, e.target.value)}
+          />
+        );
+      case 'long_answer':
+        return (
+          <Textarea
+            value={answers[question.id] || ""}
+            onChange={(e) => handleAnswerChange(question.id, e.target.value)}
+          />
+        );
+      case 'single_select':
+        return (
+          <RadioGroup
+            value={answers[question.id]}
+            onValueChange={(value) => handleAnswerChange(question.id, value)}
+          >
+            {question.options?.map((option, index) => (
+              <div key={index} className="flex items-center space-x-2">
+                <RadioGroupItem value={option} id={`${question.id}-${index}`} />
+                <Label htmlFor={`${question.id}-${index}`}>{option}</Label>
+              </div>
+            ))}
+          </RadioGroup>
+        );
+      case 'number':
+        return (
+          <Input
+            type="number"
+            value={answers[question.id] || ""}
+            onChange={(e) => handleAnswerChange(question.id, e.target.value)}
+          />
+        );
+      case 'url':
+        return (
+          <Input
+            type="url"
+            value={answers[question.id] || ""}
+            onChange={(e) => handleAnswerChange(question.id, e.target.value)}
+            placeholder="https://"
+          />
+        );
+      default:
+        return null;
+    }
+  };
+
   return (
-    <div className="max-w-3xl mx-auto">
+    <div className="">
       <Card>
         <CardHeader className="space-y-6">
           <div>
@@ -68,60 +122,12 @@ export default function FormPreview({ onDesginerClick }: { onDesginerClick: () =
                     </p>
                   )}
                 </div>
-
-                {question.type === "short_answer" && (
-                  <Input
-                    value={answers[question.id] || ""}
-                    onChange={(e) => handleAnswerChange(question.id, e.target.value)}
-                  />
-                )}
-
-                {question.type === "long_answer" && (
-                  <Textarea
-                    value={answers[question.id] || ""}
-                    onChange={(e) => handleAnswerChange(question.id, e.target.value)}
-                  />
-                )}
-
-                {question.type === "single_select" && question.options && (
-                  <RadioGroup
-                    value={answers[question.id]}
-                    onValueChange={(value) => handleAnswerChange(question.id, value)}
-                  >
-                    {question.options.map((option, index) => (
-                      <div key={index} className="flex items-center space-x-2">
-                        <RadioGroupItem value={option} id={`${question.id}-${index}`} />
-                        <Label htmlFor={`${question.id}-${index}`}>{option}</Label>
-                      </div>
-                    ))}
-                  </RadioGroup>
-                )}
-
-                {question.type === "number" && (
-                  <Input
-                    type="number"
-                    value={answers[question.id] || ""}
-                    onChange={(e) => handleAnswerChange(question.id, e.target.value)}
-                  />
-                )}
-
-                {question.type === "url" && (
-                  <Input
-                    type="url"
-                    value={answers[question.id] || ""}
-                    onChange={(e) => handleAnswerChange(question.id, e.target.value)}
-                    placeholder="https://"
-                  />
-                )}
+                {renderQuestionInput(question)}
               </div>
             ))}
           </form>
         </CardContent>
-        <CardFooter className="bg-gray-50 p-6">
-          <Button type="submit" className="ml-auto">
-            Submit
-          </Button>
-        </CardFooter>
+        
       </Card>
     </div>
   );
