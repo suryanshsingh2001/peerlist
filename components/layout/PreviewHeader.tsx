@@ -11,16 +11,16 @@ export default function PreviewHeader() {
 
   return (
     <>
-      <div className="flex items-center justify-between p-2 mx-2">
-        <h1 className="text-lg font-semibold">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between p-2 mx-2">
+        <h1 className="text-lg font-semibold mb-2 md:mb-0">
           {formTitle || "Untitled form"}
         </h1>
-        <div className="flex flex-col items-end gap-1.5">
+        <div className="flex flex-col items-start md:items-end gap-1.5">
           <span className="text-md text-gray-800">
             Form completeness —{" "}
             <span className="font-mono text-lg">{progress}%</span>
           </span>
-          <Progress value={progress} className="w-80 h-1" />
+          <Progress value={progress} className="w-full md:w-80 h-1" />
         </div>
       </div>
       <Separator />

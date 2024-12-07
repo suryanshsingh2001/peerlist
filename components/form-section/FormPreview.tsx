@@ -13,15 +13,24 @@ import Link from "next/link";
 export default function FormPreview() {
   const { questions, answers, mergeAnswers } = useFormContext();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+   
+    const formData = new FormData(e.target as HTMLFormElement);
+
+    const answers = Object.fromEntries(formData);
+    console.log("Form submitted", answers);
+
+    // console.log("Form submitted", Object.fromEntries(formData));
+
     toastMessage({
       message: "Form submitted",
-      description: "Thank you for your submission!",
+      description: `Answers: ${JSON.stringify(answers, null, 2)}`,
     });
-  };
+  }
 
   const handleAnswerChange = (questionId: string, value: string) => {
+    console.log("handleAnswerChange", questionId, value);
     mergeAnswers({ [questionId]: value });
   };
 
@@ -30,6 +39,7 @@ export default function FormPreview() {
       case "short_answer":
         return (
           <Input
+            name={question.id}
             value={answers[question.id] || ""}
             onChange={(e) => handleAnswerChange(question.id, e.target.value)}
           />
@@ -37,6 +47,8 @@ export default function FormPreview() {
       case "long_answer":
         return (
           <Textarea
+          name={question.id}
+
             value={answers[question.id] || ""}
             onChange={(e) => handleAnswerChange(question.id, e.target.value)}
           />
@@ -44,6 +56,8 @@ export default function FormPreview() {
       case "single_select":
         return (
           <RadioGroup
+          name={question.id}
+
             value={answers[question.id]}
             onValueChange={(value) => handleAnswerChange(question.id, value)}
           >
@@ -58,6 +72,8 @@ export default function FormPreview() {
       case "number":
         return (
           <Input
+          name={question.id}
+
             type="number"
             value={answers[question.id] || ""}
             onChange={(e) => handleAnswerChange(question.id, e.target.value)}
@@ -66,6 +82,8 @@ export default function FormPreview() {
       case "url":
         return (
           <Input
+          name={question.id}
+
             type="url"
             value={answers[question.id] || ""}
             onChange={(e) => handleAnswerChange(question.id, e.target.value)}
@@ -89,23 +107,17 @@ export default function FormPreview() {
                     {question.question}
                   </Label>
                   {question.helpText && (
-                    <p className="text-sm text-gray-700">
-                      {question.helpText}
-                    </p>
+                    <p className="text-sm text-gray-700">{question.helpText}</p>
                   )}
                 </div>
                 {renderQuestionInput(question)}
               </div>
             ))}
+
+            <div className="flex justify-end mt-6">
+              <Button type="submit">Submit</Button>
+            </div>
           </form>
-
-
-          <div className="flex justify-end mt-6">
-            <Button type="submit" onClick={handleSubmit}>
-              Submit
-            </Button>
-
-          </div>
         </div>
       </div>
     </div>
