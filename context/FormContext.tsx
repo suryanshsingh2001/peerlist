@@ -30,7 +30,7 @@ interface FormProviderProps {
 export const FormProvider = ({ children }: FormProviderProps) => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [isPreview, setIsPreview] = useState(false);
-  const [formTitle, setFormTitle] = useState("Untitled form");
+  const [formTitle, setFormTitle] = useState("");
 
   return (
     <FormContext.Provider value={{ questions, setQuestions, isPreview, setIsPreview, formTitle, setFormTitle }}>

@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { useFormContext } from "@/context/FormContext";
 import { Separator } from "../ui/separator";
+import { Check, FilePenLine } from "lucide-react";
 
 export default function DesignFormFooter() {
   const { questions } = useFormContext();
@@ -20,11 +21,17 @@ export default function DesignFormFooter() {
 
   return (
     <>
-      <div className="flex items-center justify-between p-2 mx-2">
-        <Button onClick={handleSaveDraft} variant="outline" disabled={!hasQuestions}>
+      <div className="flex items-center justify-between p-2 my-2">
+        <Button
+          onClick={handleSaveDraft}
+          variant="outline"
+          disabled={!hasQuestions}
+        >
+          <FilePenLine className="h-4 w-4" />
           Save as draft
         </Button>
         <Button onClick={handlePublishForm} disabled={!hasQuestions}>
+          <Check className="h-4 w-4" />
           Publish Form
         </Button>
       </div>

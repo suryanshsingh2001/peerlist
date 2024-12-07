@@ -4,11 +4,9 @@ import DesignFormFooter from "@/components/layout/design-form-footer";
 import FormDesigner from "@/components/form-section/FormDesigner";
 export default function Home() {
   return (
-    <main className="container flex flex-col min-h-screen mx-auto max-w-4xl border border-red-600 rounded-md">
+    <main className="container flex flex-col min-h-screen mx-auto max-w-4xl rounded-md">
       <DesignFormHeader />
-
       <FormDesigner />
-      
       <DesignFormFooter />
     </main>
   );

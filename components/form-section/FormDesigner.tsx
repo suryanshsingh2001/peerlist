@@ -71,7 +71,7 @@ export default function FormDesigner() {
   };
 
   return (
-    <div className="flex flex-col max-w-4xl mx-2 border border-red-800 p-2">
+    <div className="flex flex-1 flex-col max-w-4xl mx-2 border border-red-800 p-2 ">
       <>
         <DragDropContext onDragEnd={handleDragEnd}>
           <Droppable droppableId="questions">
