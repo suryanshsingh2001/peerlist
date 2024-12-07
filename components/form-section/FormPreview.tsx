@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { useFormContext } from "@/context/FormContext";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Question } from "@/lib/types";
 import { toastMessage } from "@/lib/toast";
-import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 

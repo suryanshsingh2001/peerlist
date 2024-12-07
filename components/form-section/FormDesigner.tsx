@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useFormContext } from "@/context/FormContext";
 import { Button } from "@/components/ui/button";
-import FormHeader from "./FormHeader";
 import QuestionCard from "../form-block/QuestionCard";
 import {
   DragDropContext,
@@ -11,7 +10,7 @@ import {
 } from "@hello-pangea/dnd";
 import QuestionTypeSelect from "../form-block/QuestionTypeSelect";
 import { Question } from "@/lib/types";
-import { Plus,  } from "lucide-react";
+import { Plus } from "lucide-react";
 
 export default function FormDesigner() {
   const { questions, setQuestions } = useFormContext();
