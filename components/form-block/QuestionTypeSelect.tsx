@@ -7,7 +7,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { AlignLeft, TextQuote, ListChecks, Hash, Link2 } from "lucide-react";
+import { AlignLeft, TextQuote,  Hash, Link2, CircleDot } from "lucide-react";
 
 interface QuestionTypeSelectProps {
   children: React.ReactNode;
@@ -42,7 +42,7 @@ export default function QuestionTypeSelect({
           </div>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => onSelect("single_select")}>
-          <ListChecks className="mr-2 h-4 w-4" />
+          <CircleDot className="mr-2 h-4 w-4" />
           <div className="flex flex-col">
             <span>Single Select</span>
           </div>

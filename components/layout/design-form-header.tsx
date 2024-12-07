@@ -19,7 +19,7 @@ export default function DesignFormHeader() {
           value={formTitle}
           onChange={(e) => setFormTitle(e.target.value)}
           placeholder="Untitled form"
-          className="text-xl font-semibold bg-transparent border-0 p-0 w-[300px] focus-visible:ring-0"
+          className="text-lg placeholder:text-gray-400 font-semibold bg-transparent border-0 p-0 w-[300px] focus-visible:ring-0 focus-visible:ring-offset-0"
         />
         <div className="flex items-center gap-2">
           <Button variant="outline" disabled={!hasQuestions}>

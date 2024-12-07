@@ -4,7 +4,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import {
   GripVertical,
@@ -17,14 +16,9 @@ import {
   ChevronDown,
   GripHorizontal,
   Grip,
+  CircleDot,
 } from "lucide-react";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import { Question } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import QuestionTypeSelect from "./QuestionTypeSelect";
@@ -41,7 +35,7 @@ interface QuestionCardProps {
 const questionTypeIcons = {
   short_answer: <AlignLeft className="h-4 w-4" />,
   long_answer: <TextQuote className="h-4 w-4" />,
-  single_select: <ListChecks className="h-4 w-4" />,
+  single_select: <CircleDot  className="h-4 w-4" />,
   number: <Hash className="h-4 w-4" />,
   url: <Link2 className="h-4 w-4" />,
 };
@@ -85,7 +79,7 @@ export default function QuestionCard({
                   }
                   placeholder="Write a question"
                   className={cn(
-                    "text-md font-medium bg-transparent border-0 p-0 w-full focus-visible:ring-0",
+                    "text-md font-medium bg-transparent border-0 border-none  p-0 w-full focus-visible:ring-0 focus-visible:ring-offset-0",
                     error && "text-red-500 placeholder:text-red-500"
                   )}
                 />
@@ -95,7 +89,7 @@ export default function QuestionCard({
                     onUpdate({ ...question, helpText: e.target.value })
                   }
                   placeholder="Write a help text or caption (leave empty if not needed)"
-                  className="text-sm text-muted-foreground bg-transparent border-0 p-0 w-full focus-visible:ring-0"
+                  className="text-sm text-muted-foreground bg-transparent border-0 p-0 w-full focus-visible:ring-0 focus-visible:ring-offset-0"
                 />
               </div>
               <div className="flex items-center">
@@ -141,7 +135,7 @@ export default function QuestionCard({
                           newOptions[index] = e.target.value;
                           onUpdate({ ...question, options: newOptions });
                         }}
-                        className="border-0 bg-transparent focus-visible:ring-0 "
+                        className="border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0"
                       />
                     </div>
                   ))}

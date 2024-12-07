@@ -11,7 +11,7 @@ import {
 } from "@hello-pangea/dnd";
 import QuestionTypeSelect from "../form-block/QuestionTypeSelect";
 import { Question } from "@/lib/types";
-import { PlusCircle } from "lucide-react";
+import { Plus, PlusCircle } from "lucide-react";
 import FormSubmissions from "./FormSubmissions";
 import DesignFormHeader from "../layout/design-form-header";
 
@@ -71,7 +71,7 @@ export default function FormDesigner() {
   };
 
   return (
-    <div className="flex flex-1 flex-col max-w-3xl mx-2 border border-red-800 p-2 ">
+    <div className="flex flex-1 flex-col max-w-3xl mx-2 p-2 ">
       <>
         <DragDropContext onDragEnd={handleDragEnd}>
           <Droppable droppableId="questions">
@@ -108,7 +108,7 @@ export default function FormDesigner() {
         <div className="flex justify-center mt-4">
           <QuestionTypeSelect onSelect={addQuestion}>
             <Button variant="outline" size="sm">
-              <PlusCircle className=" h-5 w-5" />
+              <Plus className=" h-5 w-5" />
               Add Question
             </Button>
           </QuestionTypeSelect>

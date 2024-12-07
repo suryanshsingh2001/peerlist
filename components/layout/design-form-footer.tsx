@@ -2,9 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { useFormContext } from "@/context/FormContext";
-import { Separator } from "../ui/separator";
-import { Check, FilePenLine } from "lucide-react";
-import { toast } from "sonner";
+import { Check, FileSliders } from "lucide-react";
 import { toastMessage } from "@/lib/toast";
 
 export default function DesignFormFooter() {
@@ -13,7 +11,7 @@ export default function DesignFormFooter() {
 
   return (
     <>
-      <div className="flex items-center justify-between p-2 my-2">
+      <div className="flex items-center justify-between p-2 my-2 border-t border-gray-200 bg-gray-100">
         <Button
           onClick={() =>
             toastMessage({
@@ -21,13 +19,15 @@ export default function DesignFormFooter() {
               description: "Your form has been saved as a draft",
             })
           }
+          size={"sm"}
           variant="outline"
           disabled={!hasQuestions}
         >
-          <FilePenLine className="h-4 w-4" />
+          <FileSliders className="h-3 w-3" />
           Save as draft
         </Button>
         <Button
+          size={"sm"}
           onClick={() => {
             toastMessage({
               message: `${formTitle ? formTitle : "Form"} published`,
@@ -36,7 +36,7 @@ export default function DesignFormFooter() {
           }}
           disabled={!hasQuestions}
         >
-          <Check className="h-4 w-4" />
+          <Check className="h-3 w-3" />
           Publish Form
         </Button>
       </div>
