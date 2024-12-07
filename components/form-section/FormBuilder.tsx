@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import FormPreview from "./FormPreview";
+import FormDesigner from "./FormDesigner";
 
 import { type Question } from "@/lib/types";
-import FormDesigner from "./FormDesigner";
 
 export default function FormBuilder() {
   const [questions, setQuestions] = useState<Question[]>([]);

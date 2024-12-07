@@ -31,6 +31,11 @@ export default function FormDesigner({
   onFormTitleChange,
 }: FormDesignerProps) {
   const [showSubmissions, setShowSubmissions] = useState(false);
+  const [errors, setErrors] = useState<Record<string, boolean>>({});
+
+  const validateQuestion = (question: Question): boolean => {
+    return question.question.trim() !== "";
+  };
 
   const addQuestion = (type: string) => {
     const newQuestion: Question = {
@@ -47,6 +52,13 @@ export default function FormDesigner({
   const updateQuestion = (index: number, updatedQuestion: Question) => {
     const newQuestions = [...questions];
     newQuestions[index] = updatedQuestion;
+    
+    // Update error state
+    setErrors(prev => ({
+      ...prev,
+      [updatedQuestion.id]: !validateQuestion(updatedQuestion)
+    }));
+    
     onQuestionsUpdate(newQuestions);
   };
 
@@ -113,6 +125,7 @@ export default function FormDesigner({
                             onDelete={() => deleteQuestion(index)}
                             onDuplicate={() => duplicateQuestion(index)}
                             dragHandleProps={provided.dragHandleProps}
+                            error={errors[question.id]}
                           />
                         </div>
                       )}

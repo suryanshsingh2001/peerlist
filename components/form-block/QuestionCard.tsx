@@ -6,7 +6,18 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { MoreVertical, GripVertical, Plus } from "lucide-react";
+import {
+  MoreVertical,
+  GripVertical,
+  Plus,
+  AlignLeft,
+  TextQuote,
+  ListChecks,
+  Hash,
+  Link2,
+  Disc,
+  Disc2,
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,6 +26,7 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Question } from "@/lib/types";
+import { cn } from "@/lib/utils";
 
 interface QuestionCardProps {
   question: Question;
@@ -22,7 +34,24 @@ interface QuestionCardProps {
   onDelete: () => void;
   onDuplicate: () => void;
   dragHandleProps?: any;
+  error?: boolean;
 }
+
+const questionTypeIcons = {
+  short_answer: <AlignLeft className="h-4 w-4" />,
+  long_answer: <TextQuote className="h-4 w-4" />,
+  single_select: <Disc2 className="h-4 w-4" />,
+  number: <Hash className="h-4 w-4" />,
+  url: <Link2 className="h-4 w-4" />,
+};
+
+const questionTypeLabels = {
+  short_answer: "Short Answer",
+  long_answer: "Long Answer",
+  single_select: "Single Select",
+  number: "Number",
+  url: "URL",
+};
 
 export default function QuestionCard({
   question,
@@ -30,15 +59,31 @@ export default function QuestionCard({
   onDelete,
   onDuplicate,
   dragHandleProps,
+  error,
 }: QuestionCardProps) {
+  const handleTypeChange = (newType: string) => {
+    const updatedQuestion: Question = {
+      ...question,
+      type: newType,
+      options:
+        newType === "single_select" ? ["Option 1", "Option 2"] : undefined,
+      placeholder: newType === "url" ? "https://" : undefined,
+    };
+    onUpdate(updatedQuestion);
+  };
+
   return (
-    <Card className="mb-4">
+    <Card
+      className={cn("mb-4 group hover:border-gray-400 transition-colors", {
+        "border-red-500": error,
+      })}
+    >
       <CardContent className="p-4">
         <div className="flex items-start gap-4">
           <div {...dragHandleProps}>
-            <GripVertical className="h-6 w-6 text-gray-400 cursor-move" />
+            <GripVertical className="h-6 w-6 text-gray-400 cursor-move opacity-0 group-hover:opacity-100 transition-opacity" />
           </div>
-          
+
           <div className="flex-1 space-y-4">
             <div className="flex items-start justify-between">
               <div className="space-y-2 flex-1">
@@ -48,7 +93,10 @@ export default function QuestionCard({
                     onUpdate({ ...question, question: e.target.value })
                   }
                   placeholder="Write a question"
-                  className="text-lg font-medium bg-transparent border-0 p-0 w-full focus-visible:ring-0"
+                  className={cn(
+                    "text-lg font-medium bg-transparent placeholder:text-muted-foreground border-0 p-0 w-full focus-visible:ring-0",
+                    error && "text-red-500 placeholder:text-red-500"
+                  )}
                 />
                 <Input
                   value={question.helpText || ""}
@@ -60,6 +108,37 @@ export default function QuestionCard({
                 />
               </div>
               <div className="flex items-center gap-2">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="hover:bg-transparent"
+                    >
+                      {
+                        questionTypeIcons[
+                          question.type as keyof typeof questionTypeIcons
+                        ]
+                      }
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end" className="w-56">
+                    {Object.entries(questionTypeLabels).map(([type, label]) => (
+                      <DropdownMenuItem
+                        key={type}
+                        onClick={() => handleTypeChange(type)}
+                        className="flex items-center"
+                      >
+                        {
+                          questionTypeIcons[
+                            type as keyof typeof questionTypeIcons
+                          ]
+                        }
+                        <span className="ml-2">{label}</span>
+                      </DropdownMenuItem>
+                    ))}
+                  </DropdownMenuContent>
+                </DropdownMenu>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="ghost" size="sm">
@@ -114,7 +193,10 @@ export default function QuestionCard({
                   size="sm"
                   className="mt-2"
                   onClick={() => {
-                    const newOptions = [...(question.options || []), `Option ${question.options!.length + 1}`];
+                    const newOptions = [
+                      ...(question.options || []),
+                      `Option ${question.options!.length + 1}`,
+                    ];
                     onUpdate({ ...question, options: newOptions });
                   }}
                 >
