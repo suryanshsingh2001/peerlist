@@ -46,13 +46,7 @@ const questionTypeIcons = {
   url: <Link2 className="h-4 w-4" />,
 };
 
-const questionTypeLabels = {
-  short_answer: "Short Answer",
-  long_answer: "Long Answer",
-  single_select: "Single Select",
-  number: "Number",
-  url: "URL",
-};
+;
 
 export default function QuestionCard({
   question,
@@ -81,9 +75,9 @@ export default function QuestionCard({
     >
       <CardContent className="p-4">
         <div className="flex items-start gap-4">
-          <div className="flex-1 space-y-4">
+          <div className="flex-1 space-y-1">
             <div className="flex items-start justify-between">
-              <div className="space-y-2 flex-1">
+              <div className="flex-1 mb-1">
                 <Input
                   value={question.question}
                   onChange={(e) =>
@@ -91,7 +85,7 @@ export default function QuestionCard({
                   }
                   placeholder="Write a question"
                   className={cn(
-                    "text-lg font-medium bg-transparent border-0 p-0 w-full focus-visible:ring-0",
+                    "text-md font-medium bg-transparent border-0 p-0 w-full focus-visible:ring-0",
                     error && "text-red-500 placeholder:text-red-500"
                   )}
                 />
@@ -104,7 +98,7 @@ export default function QuestionCard({
                   className="text-sm text-muted-foreground bg-transparent border-0 p-0 w-full focus-visible:ring-0"
                 />
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center">
                 <QuestionTypeSelect onSelect={handleTypeChange} position="center">
                   <Button
                     variant="ghost"
@@ -120,18 +114,18 @@ export default function QuestionCard({
                   </Button>
                 </QuestionTypeSelect>
 
-                <div {...dragHandleProps} className="ml-2">
+                <div {...dragHandleProps} className="">
                   <Grip className="h-5 w-5 cursor-grabbing" />
                 </div>
               </div>
             </div>
 
             {question.type === "short_answer" && (
-              <Input disabled placeholder="Short answer text" />
+              <Input disabled placeholder="Short answer text" className="bg-gray-300"  />
             )}
 
             {question.type === "long_answer" && (
-              <Textarea disabled placeholder="Long answer text" />
+              <Textarea disabled placeholder="Long answer text" className="bg-gray-300" />
             )}
 
             {question.type === "single_select" && question.options && (
@@ -147,7 +141,7 @@ export default function QuestionCard({
                           newOptions[index] = e.target.value;
                           onUpdate({ ...question, options: newOptions });
                         }}
-                        className="border-0 bg-transparent focus-visible:ring-0"
+                        className="border-0 bg-transparent focus-visible:ring-0 "
                       />
                     </div>
                   ))}
