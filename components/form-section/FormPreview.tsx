@@ -1,23 +1,16 @@
-"use client";
+import React, { useState } from 'react';
+import { useFormContext } from '@/context/FormContext';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardFooter } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
+import { useToast } from '@/hooks/use-toast';
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { useToast } from "@/hooks/use-toast";
-import { type Question } from "@/lib/types";
-
-interface FormPreviewProps {
-  questions: Question[];
-  title?: string;
-  onDesginerClick: () => void;
-}
-
-export default function FormPreview({ questions, title = "Untitled Form", onDesginerClick }: FormPreviewProps) {
+export default function FormPreview({ onDesginerClick }: { onDesginerClick: () => void }) {
+  const { questions, formTitle } = useFormContext();
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const { toast } = useToast();
 
@@ -49,12 +42,9 @@ export default function FormPreview({ questions, title = "Untitled Form", onDesg
       <Card>
         <CardHeader className="space-y-6">
           <div>
-            <h1 className="text-2xl font-bold">{title}</h1>
-
-            <Button onClick={() => {
-                onDesginerClick();
-            }} variant="outline" className="mt-4">
-                Edit Form
+            <h1 className="text-2xl font-bold">{formTitle}</h1>
+            <Button onClick={onDesginerClick} variant="outline" className="mt-4">
+              Edit Form
             </Button>
           </div>
           <div className="flex items-center justify-between border-t pt-4">
@@ -82,27 +72,21 @@ export default function FormPreview({ questions, title = "Untitled Form", onDesg
                 {question.type === "short_answer" && (
                   <Input
                     value={answers[question.id] || ""}
-                    onChange={(e) =>
-                      handleAnswerChange(question.id, e.target.value)
-                    }
+                    onChange={(e) => handleAnswerChange(question.id, e.target.value)}
                   />
                 )}
 
                 {question.type === "long_answer" && (
                   <Textarea
                     value={answers[question.id] || ""}
-                    onChange={(e) =>
-                      handleAnswerChange(question.id, e.target.value)
-                    }
+                    onChange={(e) => handleAnswerChange(question.id, e.target.value)}
                   />
                 )}
 
                 {question.type === "single_select" && question.options && (
                   <RadioGroup
                     value={answers[question.id]}
-                    onValueChange={(value) =>
-                      handleAnswerChange(question.id, value)
-                    }
+                    onValueChange={(value) => handleAnswerChange(question.id, value)}
                   >
                     {question.options.map((option, index) => (
                       <div key={index} className="flex items-center space-x-2">
@@ -117,9 +101,7 @@ export default function FormPreview({ questions, title = "Untitled Form", onDesg
                   <Input
                     type="number"
                     value={answers[question.id] || ""}
-                    onChange={(e) =>
-                      handleAnswerChange(question.id, e.target.value)
-                    }
+                    onChange={(e) => handleAnswerChange(question.id, e.target.value)}
                   />
                 )}
 
@@ -127,9 +109,7 @@ export default function FormPreview({ questions, title = "Untitled Form", onDesg
                   <Input
                     type="url"
                     value={answers[question.id] || ""}
-                    onChange={(e) =>
-                      handleAnswerChange(question.id, e.target.value)
-                    }
+                    onChange={(e) => handleAnswerChange(question.id, e.target.value)}
                     placeholder="https://"
                   />
                 )}

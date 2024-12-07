@@ -6,7 +6,18 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { GripVertical, Plus, AlignLeft, TextQuote, ListChecks, Hash, Link2, ChevronDown, GripHorizontal, Grip } from "lucide-react";
+import {
+  GripVertical,
+  Plus,
+  AlignLeft,
+  TextQuote,
+  ListChecks,
+  Hash,
+  Link2,
+  ChevronDown,
+  GripHorizontal,
+  Grip,
+} from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -53,16 +64,19 @@ export default function QuestionCard({
     const updatedQuestion: Question = {
       ...question,
       type: newType,
-      options: newType === "single_select" ? ["Option 1", "Option 2"] : undefined,
+      options:
+        newType === "single_select" ? ["Option 1", "Option 2"] : undefined,
       placeholder: newType === "url" ? "https://" : undefined,
     };
     onUpdate(updatedQuestion);
   };
 
   return (
-    <Card className={cn("mb-4 group hover:border-gray-400 transition-colors", {
-      "border-red-500": error
-    })}>
+    <Card
+      className={cn("mb-4 group hover:border-gray-400 transition-colors", {
+        "border-red-500": error,
+      })}
+    >
       <CardContent className="p-4">
         <div className="flex items-start gap-4">
           <div className="flex-1 space-y-4">
@@ -91,8 +105,16 @@ export default function QuestionCard({
               <div className="flex items-center gap-2">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="sm" className="hover:bg-transparent flex items-center gap-1">
-                      {questionTypeIcons[question.type as keyof typeof questionTypeIcons]}
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="hover:bg-transparent flex items-center gap-1"
+                    >
+                      {
+                        questionTypeIcons[
+                          question.type as keyof typeof questionTypeIcons
+                        ]
+                      }
                       <ChevronDown className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
@@ -103,7 +125,11 @@ export default function QuestionCard({
                         onClick={() => handleTypeChange(type)}
                         className="flex items-center"
                       >
-                        {questionTypeIcons[type as keyof typeof questionTypeIcons]}
+                        {
+                          questionTypeIcons[
+                            type as keyof typeof questionTypeIcons
+                          ]
+                        }
                         <span className="ml-2">{label}</span>
                       </DropdownMenuItem>
                     ))}
@@ -147,7 +173,10 @@ export default function QuestionCard({
                   size="sm"
                   className="mt-2"
                   onClick={() => {
-                    const newOptions = [...(question.options || []), `Option ${question.options!.length + 1}`];
+                    const newOptions = [
+                      ...(question.options || []),
+                      `Option ${question.options!.length + 1}`,
+                    ];
                     onUpdate({ ...question, options: newOptions });
                   }}
                 >

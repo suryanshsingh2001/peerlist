@@ -1,34 +1,20 @@
 "use client";
 
-import { useState } from "react";
-import FormPreview from "./FormPreview";
-import FormDesigner from "./FormDesigner";
 
-import { type Question } from "@/lib/types";
+import React from 'react';
+import FormPreview from './FormPreview';
+import FormDesigner from './FormDesigner';
+import { useFormContext } from '@/context/FormContext';
 
 export default function FormBuilder() {
-  const [questions, setQuestions] = useState<Question[]>([]);
-  const [isPreview, setIsPreview] = useState(false);
-  const [formTitle, setFormTitle] = useState("Untitled form");
-
-  const handleQuestionsUpdate = (updatedQuestions: Question[]) => {
-    setQuestions(updatedQuestions);
-  };
+  const { isPreview, setIsPreview } = useFormContext();
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 rounded-md">
       {isPreview ? (
-        <FormPreview questions={questions} title={formTitle} onDesginerClick={() => {
-            setIsPreview(false);
-        }} />
+        <FormPreview onDesginerClick={() => setIsPreview(false)} />
       ) : (
-        <FormDesigner
-          questions={questions}
-          onQuestionsUpdate={handleQuestionsUpdate}
-          onPreviewClick={() => setIsPreview(true)}
-          formTitle={formTitle}
-          onFormTitleChange={setFormTitle}
-        />
+        <FormDesigner onPreviewClick={() => setIsPreview(true)} />
       )}
     </div>
   );

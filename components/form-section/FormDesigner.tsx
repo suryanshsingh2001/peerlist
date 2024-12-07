@@ -1,35 +1,16 @@
-"use client";
+import React, { useState } from 'react';
+import { useFormContext } from '@/context/FormContext';
+import { Button } from '@/components/ui/button';
+import FormHeader from './FormHeader';
+import QuestionCard from '../form-block/QuestionCard';
+import { DragDropContext, Droppable, Draggable, DropResult } from '@hello-pangea/dnd';
+import QuestionTypeSelect from '../form-block/QuestionTypeSelect';
+import { Question } from '@/lib/types';
+import { PlusCircle } from 'lucide-react';
+import FormSubmissions from './FormSubmissions';
 
-import { useState } from "react";
-import { PlusCircle } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import FormHeader from "./FormHeader";
-import QuestionCard from "../form-block/QuestionCard";
-import { type Question } from "@/lib/types";
-import {
-  DragDropContext,
-  Droppable,
-  Draggable,
-  DropResult,
-} from "@hello-pangea/dnd";
-import FormSubmissions from "./FormSubmissions";
-import QuestionTypeSelect from "../form-block/QuestionTypeSelect";
-
-interface FormDesignerProps {
-  questions: Question[];
-  onQuestionsUpdate: (questions: Question[]) => void;
-  onPreviewClick: () => void;
-  formTitle: string;
-  onFormTitleChange: (title: string) => void;
-}
-
-export default function FormDesigner({
-  questions,
-  onQuestionsUpdate,
-  onPreviewClick,
-  formTitle,
-  onFormTitleChange,
-}: FormDesignerProps) {
+export default function FormDesigner({ onPreviewClick }: { onPreviewClick: () => void }) {
+  const { questions, setQuestions, formTitle, setFormTitle } = useFormContext();
   const [showSubmissions, setShowSubmissions] = useState(false);
   const [errors, setErrors] = useState<Record<string, boolean>>({});
 
@@ -46,25 +27,22 @@ export default function FormDesigner({
       options: type === "single_select" ? ["Option 1", "Option 2"] : undefined,
       placeholder: type === "url" ? "https://" : undefined,
     };
-    onQuestionsUpdate([...questions, newQuestion]);
+    setQuestions([...questions, newQuestion]);
   };
 
   const updateQuestion = (index: number, updatedQuestion: Question) => {
     const newQuestions = [...questions];
     newQuestions[index] = updatedQuestion;
-    
-    // Update error state
     setErrors(prev => ({
       ...prev,
       [updatedQuestion.id]: !validateQuestion(updatedQuestion)
     }));
-    
-    onQuestionsUpdate(newQuestions);
+    setQuestions(newQuestions);
   };
 
   const deleteQuestion = (index: number) => {
     const newQuestions = questions.filter((_, i) => i !== index);
-    onQuestionsUpdate(newQuestions);
+    setQuestions(newQuestions);
   };
 
   const duplicateQuestion = (index: number) => {
@@ -75,24 +53,22 @@ export default function FormDesigner({
     };
     const newQuestions = [...questions];
     newQuestions.splice(index + 1, 0, duplicatedQuestion);
-    onQuestionsUpdate(newQuestions);
+    setQuestions(newQuestions);
   };
 
   const handleDragEnd = (result: DropResult) => {
     if (!result.destination) return;
-
     const items = Array.from(questions);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-
-    onQuestionsUpdate(items);
+    setQuestions(items);
   };
 
   return (
     <div className="max-w-3xl mx-auto">
       <FormHeader
         title={formTitle}
-        onTitleChange={onFormTitleChange}
+        onTitleChange={setFormTitle}
         onPreviewClick={onPreviewClick}
         onToggleSubmissions={() => setShowSubmissions(!showSubmissions)}
         showSubmissions={showSubmissions}
@@ -107,21 +83,12 @@ export default function FormDesigner({
               {(provided) => (
                 <div {...provided.droppableProps} ref={provided.innerRef}>
                   {questions.map((question, index) => (
-                    <Draggable
-                      key={question.id}
-                      draggableId={question.id}
-                      index={index}
-                    >
+                    <Draggable key={question.id} draggableId={question.id} index={index}>
                       {(provided) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                        >
+                        <div ref={provided.innerRef} {...provided.draggableProps}>
                           <QuestionCard
                             question={question}
-                            onUpdate={(updatedQuestion) =>
-                              updateQuestion(index, updatedQuestion)
-                            }
+                            onUpdate={(updatedQuestion) => updateQuestion(index, updatedQuestion)}
                             onDelete={() => deleteQuestion(index)}
                             onDuplicate={() => duplicateQuestion(index)}
                             dragHandleProps={provided.dragHandleProps}
@@ -139,7 +106,7 @@ export default function FormDesigner({
 
           <div className="flex justify-center mt-8">
             <QuestionTypeSelect onSelect={addQuestion}>
-              <Button variant="outline" size={"sm"}>
+              <Button variant="outline" size="sm">
                 <PlusCircle className="mr-2 h-5 w-5" />
                 Add Question
               </Button>
