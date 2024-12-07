@@ -10,8 +10,8 @@ export interface Question {
 
 export interface FormSubmission {
   id: number;
+  formTitle: string;
   submittedAt: string;
-  completionRate: string;
-  status: string;
-  answers: Record<string, string>;
+  answers: Record<string, string> | any;
+  questions: Question[];
 }

@@ -11,13 +11,10 @@ import {
 } from "@hello-pangea/dnd";
 import QuestionTypeSelect from "../form-block/QuestionTypeSelect";
 import { Question } from "@/lib/types";
-import { Plus, PlusCircle } from "lucide-react";
-import FormSubmissions from "./FormSubmissions";
-import DesignFormHeader from "../layout/design-form-header";
+import { Plus,  } from "lucide-react";
 
 export default function FormDesigner() {
-  const { questions, setQuestions, formTitle, setFormTitle } = useFormContext();
-  const [showSubmissions, setShowSubmissions] = useState(false);
+  const { questions, setQuestions } = useFormContext();
   const [errors, setErrors] = useState<Record<string, boolean>>({});
 
   const validateQuestion = (question: Question): boolean => {

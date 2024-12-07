@@ -10,9 +10,18 @@ import { Question } from "@/lib/types";
 import { toastMessage } from "@/lib/toast";
 import Link from "next/link";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
 export default function FormPreview() {
-  const { questions, answers, mergeAnswers, formTitle } = useFormContext();
+  const router = useRouter();
+  const {
+    questions,
+    answers,
+    mergeAnswers,
+    formTitle,
+    addSubmission,
+    formSubmissions,
+  } = useFormContext();
   const [submitting, setSubmitting] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
@@ -24,8 +33,10 @@ export default function FormPreview() {
     const formObject = Object.fromEntries(formData);
 
     const submissionData = {
+      id: formSubmissions.length + 1,
       formTitle,
       questions,
+      submittedAt: new Date().toLocaleString(),
       answers: formObject,
     };
 
@@ -33,9 +44,18 @@ export default function FormPreview() {
       const response = await axios.post("/api/saveForm", submissionData);
       console.log("Form saved successfully", response.data);
 
+      addSubmission(submissionData);
+
       toastMessage({
         message: "Form submitted",
-        description: `Answers: ${JSON.stringify(formObject, null, 2)}`,
+        description: `Your ${formTitle} has been submitted successfully`,
+        action: {
+          label: "View Submissions",
+          onClick: () => {
+            console.log("View submissions");
+            router.push("/submissions");
+          },
+        },
       });
     } catch (error: any) {
       console.error("Error saving form data", error);
