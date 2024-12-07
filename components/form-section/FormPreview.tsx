@@ -12,28 +12,39 @@ import Link from "next/link";
 import axios from "axios";
 
 export default function FormPreview() {
-  const { questions, answers, mergeAnswers } = useFormContext();
+  const { questions, answers, mergeAnswers, formTitle } = useFormContext();
+  const [submitting, setSubmitting] = useState(false);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
+    setSubmitting(true);
+
     const formData = new FormData(e.target as HTMLFormElement);
     const formObject = Object.fromEntries(formData);
 
+    const submissionData = {
+      formTitle,
+      questions,
+      answers: formObject,
+    };
+
     try {
-      const response = await axios.post('/api/saveForm', formObject);
-      console.log('Form saved successfully', response.data);
+      const response = await axios.post("/api/saveForm", submissionData);
+      console.log("Form saved successfully", response.data);
 
       toastMessage({
         message: "Form submitted",
         description: `Answers: ${JSON.stringify(formObject, null, 2)}`,
       });
-    } catch (error : any) {
-      console.error('Error saving form data', error);
+    } catch (error: any) {
+      console.error("Error saving form data", error);
       toastMessage({
         message: "Error submitting form",
         description: error.message,
       });
+    } finally {
+      setSubmitting(false);
     }
   }
 
@@ -55,8 +66,7 @@ export default function FormPreview() {
       case "long_answer":
         return (
           <Textarea
-          name={question.id}
-
+            name={question.id}
             value={answers[question.id] || ""}
             onChange={(e) => handleAnswerChange(question.id, e.target.value)}
           />
@@ -64,8 +74,7 @@ export default function FormPreview() {
       case "single_select":
         return (
           <RadioGroup
-          name={question.id}
-
+            name={question.id}
             value={answers[question.id]}
             onValueChange={(value) => handleAnswerChange(question.id, value)}
           >
@@ -80,8 +89,7 @@ export default function FormPreview() {
       case "number":
         return (
           <Input
-          name={question.id}
-
+            name={question.id}
             type="number"
             value={answers[question.id] || ""}
             onChange={(e) => handleAnswerChange(question.id, e.target.value)}
@@ -90,8 +98,7 @@ export default function FormPreview() {
       case "url":
         return (
           <Input
-          name={question.id}
-
+            name={question.id}
             type="url"
             value={answers[question.id] || ""}
             onChange={(e) => handleAnswerChange(question.id, e.target.value)}
@@ -123,7 +130,9 @@ export default function FormPreview() {
             ))}
 
             <div className="flex justify-end mt-6">
-              <Button type="submit">Submit</Button>
+              <Button disabled={submitting} type="submit">
+                Submit
+              </Button>
             </div>
           </form>
         </div>

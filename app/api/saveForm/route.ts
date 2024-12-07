@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
+// app/api/saveForm/route.ts
+import { NextRequest, NextResponse } from "next/server";
+
+let submittedForms: any = [];
 
 export async function POST(req: NextRequest) {
   const formData = await req.json();
-
-  console.log('Form data received:', formData);
-
-  // Respond with a success message
-  return NextResponse.json({ message: 'Form data saved successfully' });
+  submittedForms.push(formData);
+  return NextResponse.json({ message: "Form data saved successfully" });
 }
