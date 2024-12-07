@@ -9,24 +9,32 @@ import { Label } from "@/components/ui/label";
 import { Question } from "@/lib/types";
 import { toastMessage } from "@/lib/toast";
 import Link from "next/link";
+import axios from "axios";
 
 export default function FormPreview() {
   const { questions, answers, mergeAnswers } = useFormContext();
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-   
+
     const formData = new FormData(e.target as HTMLFormElement);
+    const formObject = Object.fromEntries(formData);
 
-    const answers = Object.fromEntries(formData);
-    console.log("Form submitted", answers);
+    try {
+      const response = await axios.post('/api/saveForm', formObject);
+      console.log('Form saved successfully', response.data);
 
-    // console.log("Form submitted", Object.fromEntries(formData));
-
-    toastMessage({
-      message: "Form submitted",
-      description: `Answers: ${JSON.stringify(answers, null, 2)}`,
-    });
+      toastMessage({
+        message: "Form submitted",
+        description: `Answers: ${JSON.stringify(formObject, null, 2)}`,
+      });
+    } catch (error : any) {
+      console.error('Error saving form data', error);
+      toastMessage({
+        message: "Error submitting form",
+        description: error.message,
+      });
+    }
   }
 
   const handleAnswerChange = (questionId: string, value: string) => {
