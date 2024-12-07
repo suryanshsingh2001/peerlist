@@ -11,6 +11,9 @@ interface FormContextProps {
   setIsPreview: (isPreview: boolean) => void;
   formTitle: string;
   setFormTitle: (title: string) => void;
+  answers: Record<string, string>;
+  setAnswers: (answers: Record<string, string>) => void;
+  mergeAnswers: (newAnswers: Record<string, string>) => void;
 }
 
 const FormContext = createContext<FormContextProps | undefined>(undefined);
@@ -29,11 +32,20 @@ interface FormProviderProps {
 
 export const FormProvider = ({ children }: FormProviderProps) => {
   const [questions, setQuestions] = useState<Question[]>([]);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
   const [isPreview, setIsPreview] = useState(false);
   const [formTitle, setFormTitle] = useState("");
 
+
+  const mergeAnswers = (newAnswers: Record<string, string>) => {
+    setAnswers((prevAnswers) => ({
+      ...prevAnswers,
+      ...newAnswers,
+    }));
+  }
+
   return (
-    <FormContext.Provider value={{ questions, setQuestions, isPreview, setIsPreview, formTitle, setFormTitle }}>
+    <FormContext.Provider value={{ questions, setQuestions, isPreview, setIsPreview, formTitle, setFormTitle, answers, setAnswers, mergeAnswers }}>
       {children}
     </FormContext.Provider>
   );
