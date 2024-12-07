@@ -11,7 +11,7 @@ export default function DesignFormFooter() {
 
   return (
     <>
-      <div className="flex items-center justify-between p-2 my-2 border-t border-gray-200 bg-gray-100">
+      <div className="flex items-center justify-between p-2.5 my-2 border-t border-gray-200 bg-gray-100">
         <Button
           onClick={() =>
             toastMessage({

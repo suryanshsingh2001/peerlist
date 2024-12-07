@@ -35,12 +35,10 @@ interface QuestionCardProps {
 const questionTypeIcons = {
   short_answer: <AlignLeft className="h-4 w-4" />,
   long_answer: <TextQuote className="h-4 w-4" />,
-  single_select: <CircleDot  className="h-4 w-4" />,
+  single_select: <CircleDot className="h-4 w-4" />,
   number: <Hash className="h-4 w-4" />,
   url: <Link2 className="h-4 w-4" />,
 };
-
-;
 
 export default function QuestionCard({
   question,
@@ -62,12 +60,8 @@ export default function QuestionCard({
   };
 
   return (
-    <Card
-      className={cn("mb-4 group hover:border-gray-400 transition-colors", {
-        "border-red-500": error,
-      })}
-    >
-      <CardContent className="p-4">
+    <Card className={cn("mb-4 group hover:border-gray-400 transition-colors")}>
+      <CardContent className="px-4 py-2">
         <div className="flex items-start gap-4">
           <div className="flex-1 space-y-1">
             <div className="flex items-start justify-between">
@@ -92,8 +86,11 @@ export default function QuestionCard({
                   className="text-sm text-muted-foreground bg-transparent border-0 p-0 w-full focus-visible:ring-0 focus-visible:ring-offset-0"
                 />
               </div>
-              <div className="flex items-center">
-                <QuestionTypeSelect onSelect={handleTypeChange} position="center">
+              <div className="flex items-center text-gray-500">
+                <QuestionTypeSelect
+                  onSelect={handleTypeChange}
+                  position="center"
+                >
                   <Button
                     variant="ghost"
                     size="sm"
@@ -104,7 +101,7 @@ export default function QuestionCard({
                         question.type as keyof typeof questionTypeIcons
                       ]
                     }
-                    <ChevronDown className="h-4 w-4" />
+                    <ChevronDown className="h-4 w-4"  />
                   </Button>
                 </QuestionTypeSelect>
 
@@ -115,11 +112,17 @@ export default function QuestionCard({
             </div>
 
             {question.type === "short_answer" && (
-              <Input disabled placeholder="Short answer text" className="bg-gray-300"  />
+              <Input
+                disabled
+                
+              />
             )}
 
             {question.type === "long_answer" && (
-              <Textarea disabled placeholder="Long answer text" className="bg-gray-300" />
+              <Textarea
+                disabled
+                className="text-muted-foreground"
+              />
             )}
 
             {question.type === "single_select" && question.options && (
