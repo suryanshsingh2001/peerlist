@@ -6,24 +6,12 @@ import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import {
-  MoreVertical,
-  GripVertical,
-  Plus,
-  AlignLeft,
-  TextQuote,
-  ListChecks,
-  Hash,
-  Link2,
-  Disc,
-  Disc2,
-} from "lucide-react";
+import { GripVertical, Plus, AlignLeft, TextQuote, ListChecks, Hash, Link2, ChevronDown, GripHorizontal, Grip } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Question } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -40,7 +28,7 @@ interface QuestionCardProps {
 const questionTypeIcons = {
   short_answer: <AlignLeft className="h-4 w-4" />,
   long_answer: <TextQuote className="h-4 w-4" />,
-  single_select: <Disc2 className="h-4 w-4" />,
+  single_select: <ListChecks className="h-4 w-4" />,
   number: <Hash className="h-4 w-4" />,
   url: <Link2 className="h-4 w-4" />,
 };
@@ -65,25 +53,18 @@ export default function QuestionCard({
     const updatedQuestion: Question = {
       ...question,
       type: newType,
-      options:
-        newType === "single_select" ? ["Option 1", "Option 2"] : undefined,
+      options: newType === "single_select" ? ["Option 1", "Option 2"] : undefined,
       placeholder: newType === "url" ? "https://" : undefined,
     };
     onUpdate(updatedQuestion);
   };
 
   return (
-    <Card
-      className={cn("mb-4 group hover:border-gray-400 transition-colors", {
-        "border-red-500": error,
-      })}
-    >
+    <Card className={cn("mb-4 group hover:border-gray-400 transition-colors", {
+      "border-red-500": error
+    })}>
       <CardContent className="p-4">
         <div className="flex items-start gap-4">
-          <div {...dragHandleProps}>
-            <GripVertical className="h-6 w-6 text-gray-400 cursor-move opacity-0 group-hover:opacity-100 transition-opacity" />
-          </div>
-
           <div className="flex-1 space-y-4">
             <div className="flex items-start justify-between">
               <div className="space-y-2 flex-1">
@@ -94,7 +75,7 @@ export default function QuestionCard({
                   }
                   placeholder="Write a question"
                   className={cn(
-                    "text-lg font-medium bg-transparent placeholder:text-muted-foreground border-0 p-0 w-full focus-visible:ring-0",
+                    "text-lg font-medium bg-transparent border-0 p-0 w-full focus-visible:ring-0",
                     error && "text-red-500 placeholder:text-red-500"
                   )}
                 />
@@ -110,16 +91,9 @@ export default function QuestionCard({
               <div className="flex items-center gap-2">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="hover:bg-transparent"
-                    >
-                      {
-                        questionTypeIcons[
-                          question.type as keyof typeof questionTypeIcons
-                        ]
-                      }
+                    <Button variant="ghost" size="sm" className="hover:bg-transparent flex items-center gap-1">
+                      {questionTypeIcons[question.type as keyof typeof questionTypeIcons]}
+                      <ChevronDown className="h-4 w-4" />
                     </Button>
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="w-56">
@@ -129,35 +103,15 @@ export default function QuestionCard({
                         onClick={() => handleTypeChange(type)}
                         className="flex items-center"
                       >
-                        {
-                          questionTypeIcons[
-                            type as keyof typeof questionTypeIcons
-                          ]
-                        }
+                        {questionTypeIcons[type as keyof typeof questionTypeIcons]}
                         <span className="ml-2">{label}</span>
                       </DropdownMenuItem>
                     ))}
                   </DropdownMenuContent>
                 </DropdownMenu>
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="ghost" size="sm">
-                      <MoreVertical className="h-4 w-4" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem onClick={onDuplicate}>
-                      Duplicate
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem
-                      onClick={onDelete}
-                      className="text-destructive"
-                    >
-                      Delete
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
+                <div {...dragHandleProps} className="ml-2">
+                  <Grip className="h-5 w-5 cursor-grabbing" />
+                </div>
               </div>
             </div>
 
@@ -193,10 +147,7 @@ export default function QuestionCard({
                   size="sm"
                   className="mt-2"
                   onClick={() => {
-                    const newOptions = [
-                      ...(question.options || []),
-                      `Option ${question.options!.length + 1}`,
-                    ];
+                    const newOptions = [...(question.options || []), `Option ${question.options!.length + 1}`];
                     onUpdate({ ...question, options: newOptions });
                   }}
                 >

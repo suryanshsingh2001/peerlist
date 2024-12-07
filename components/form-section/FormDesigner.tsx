@@ -139,7 +139,7 @@ export default function FormDesigner({
 
           <div className="flex justify-center mt-8">
             <QuestionTypeSelect onSelect={addQuestion}>
-              <Button variant="outline" size="lg">
+              <Button variant="outline" size={"sm"}>
                 <PlusCircle className="mr-2 h-5 w-5" />
                 Add Question
               </Button>
