@@ -21,6 +21,7 @@ Create a Next.js application for a form builder that allows users to create, pre
 - [ ] Follow best practices for web accessibility.
 - [ ] Include visually appealing elements with micro-interactions.
 - [ ] Maintain consistent application state throughout the user experience.
+- [ ] Allow abtraction to extend more question types in the future.
 
 ### Extra Features
 

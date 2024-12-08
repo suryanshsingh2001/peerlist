@@ -152,7 +152,7 @@ export default function FormPreview() {
 
   return (
     <>
-      <AnimatedContainer animation="fade" duration={0.3} className="">
+      <AnimatedContainer animation="scale" duration={0.3} className="">
         <div>
           <div className="p-6">
             

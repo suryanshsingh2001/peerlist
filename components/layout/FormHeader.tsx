@@ -21,7 +21,15 @@ export default function DesignFormHeader() {
           placeholder="Untitled form"
           className="text-lg placeholder:text-gray-400 font-semibold bg-transparent border-0 p-0 max-w-[calc(100%-100px)] focus-visible:ring-0 focus-visible:ring-offset-0"
         />
-        <Link href="/preview" className="">
+        <Link
+          href="/preview"
+          className=""
+          onClick={(e) => {
+            if (!hasQuestions) {
+              e.preventDefault();
+            }
+          }}
+        >
           <Button
             variant="outline"
             disabled={!hasQuestions}
