@@ -1,67 +1,99 @@
-# Form Builder Application
+# Peerlist Frontend Developer Assignment
+
+
+Create a Next.js application for a form builder that allows users to create, preview, fill out, and submit forms. 
 
 ## Task Overview
 
-Create a Next.js application for a form builder that allows users to create, preview, fill out, and submit forms.
+### Functional Requirements 
 
-## Task Overview
-
-### Functional Requirements
-
-- [ ] Implement form creation UI with 6 question types (short answer, long answer, single select, number, URL, date)
-- [ ] Implement questiom, card states (active, inactive, hover, error) along with 
-- [ ] Implement form preview with fill-out capability and completeness percentage.
-- [ ] Implement form submission with success message.
-- [ ] Implement a API to save the form data
-- [ ] Implement a page to view submitted forms in a table
+- [ ] Create a new form by selecting input types and adding questions (short answer, long answer, single select, number, URL, date)
+- [ ] Add a title for the form.
+- [ ] Change the question type after adding a question by clicking on the question type icon and selecting a different type from the dropdown menu.
+- [ ] Reorder the questions in the form creation page using drag and drop functionality.
+- [ ] Publish the form or save it as a draft.
+- [ ] Preview the created form and fill it out.
+- [ ] See the completeness percentage of the form while filling it out.
+- [ ] Submit the form and see a success message after submission.
+- [ ] View submitted forms in a table with details such as submission date and form title and view the submitted form details.
 
 ### Non-Functional Requirements
+- [ ] Ensure responsiveness and compatibility with mobile devices.
+- [ ] Follow best practices for web accessibility.
+- [ ] Include visually appealing elements with micro-interactions.
+- [ ] Maintain consistent application state throughout the user experience.
 
-- [ ] Use Next.js for the application
-- [ ] Use TypeScript or JavaScript
-- [ ] Use TailwindCSS for the UI
-- [ ] Host the application and include the live link in the GitHub repository README or when submitting the assignment
-- [ ] Maintain a clean commit history throughout the development process
-- [ ] Ensure the app is pixel-perfect and mobile-responsive
+### Extra Features
 
-### Bonus Points
+- [ ] Template forms that user can select and start from there instead of creating a form from scratch.
+- [ ] Feature to duplicate/delete a question in the form creation page.
+- [ ] Sorting and searching options in the form submissions page.
 
-- [ ] Add interactions or animations on UI actions
-- [ ] Add functionality to re-order the form questions
-- [ ] Use an API for saving the form data
-- [ ] Show submitted forms in a table
+### Tech Stack Used
 
-### Assumptions
+- Nextjs/Typescript
+- Tailwind CSS
+- Shadcn UI
+- Framer Motion
+- Context API for state management
 
-- [ ] Mention any assumptions made for the sake of this assignment either in the README or in the email of assignment submission
+### Assumptions / Constraints
 
-## Pages Breakdown
+- No complex validation for form fields (e.g., email, password). All fields are required by default.
+- No support for conditional logic in form fields.
+- Form submissions are stored in local storage, not in a database.
+- Draft forms are saved in local storage and can be retrieved later.
+- Publishing a form redirects the user to the form preview page, but preview is also available in the form creation page.
 
-### 1. Form Creation Page
+## UI Breakdown
 
-- **Path:** `/create`
-- **Description:** This page allows users to create a new form by selecting input types and adding questions. Users can add questions of different types (short answer, long answer, single select, number, URL, date).
+### Form Creation Page
 
-### 2. Form Preview Page
+ This page is  where the user can create a new form by adding questions and selecting input types. The user can also reorder the questions and change the question type after adding a question. The user can save the form as a draft or publish it.
 
-- **Path:** `/preview`
-- **Description:** This page displays a preview of the created form. Users can fill out the form and see the completeness percentage. The form can be submitted from this page.
+ ***Components***
+   - `FormHeader.tsx`
+   - `FormDesigner.tsx`
+   - `FormFooter.tsx`
 
-### 3. Form Submissions Page
+### Form Preview Page
+This page is where the user can preview the created form and fill it out. The user can see the completeness percentage of the form while filling it out.
 
-- **Path:** `/submissions`
-- **Description:** This page displays a table of submitted forms. Each row in the table represents a submitted form with details such as submission date and form title.
+ ***Components***
+   - `FormHeader.tsx`
+   - `FormPreview.tsx`
+
+
+### Form Submissions Page
+This page is where the user can view submitted forms in a table with details such as submission date and form title and view the submitted form details.
+
+**Components**
+   - `FormSubmissions.tsx`
+
+
 
 ## Getting Started
 
-### Prerequisites
 
-- Node.js
-- npm or yarn
 
-### Installation
-
-1. Clone the repository:
+1. Install dependencies:
    ```bash
-   git clone <repository-url>
-   cd form-builder
+   npm install
+   ```
+
+2. Run the development server:
+   ```bash
+   npm run dev
+   ```
+   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+   
+
+## Folder Structure
+
+The project is structured as follows:
+
+```
+
+```
+
