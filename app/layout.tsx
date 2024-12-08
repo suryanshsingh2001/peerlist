@@ -1,5 +1,5 @@
 import { FormProvider } from "@/context/FormContext";
-import "./globals.css";
+import "./styles/globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";

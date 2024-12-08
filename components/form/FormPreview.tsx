@@ -10,6 +10,7 @@ import { toastMessage } from "@/lib/toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Loader } from "lucide-react";
+import { AnimatedContainer } from "../shared/animated-container";
 
 export default function FormPreview() {
   const router = useRouter();
@@ -58,10 +59,7 @@ export default function FormPreview() {
         },
       });
 
-
       setAnswers({});
-      
-
     } catch (error: any) {
       console.error("Error saving form data", error);
       toastMessage({
@@ -136,7 +134,7 @@ export default function FormPreview() {
   };
 
   return (
-    <div className="">
+    <AnimatedContainer animation="fade" duration={0.3} className="">
       <div>
         <div className="p-6">
           <form onSubmit={handleSubmit} className="space-y-8">
@@ -155,14 +153,20 @@ export default function FormPreview() {
             ))}
 
             <div className="flex justify-end mt-6">
-              <Button disabled={submitting} type="submit" className="transition-all duration-300 hover:scale-105 active:scale-95">
+              <Button
+                disabled={submitting}
+                type="submit"
+                className="transition-all duration-300 hover:scale-105 active:scale-95"
+              >
                 {submitting && <Loader className="h-4 w-4 mr-2" />}
                 Submit
               </Button>
             </div>
           </form>
+
+            
         </div>
       </div>
-    </div>
+    </AnimatedContainer>
   );
 }
