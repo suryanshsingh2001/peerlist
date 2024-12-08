@@ -1,3 +1,4 @@
+// components/form/FormPreview.tsx
 import React, { useState } from "react";
 import { useFormContext } from "@/context/FormContext";
 import { Button } from "@/components/ui/button";
@@ -128,6 +129,15 @@ export default function FormPreview() {
             placeholder="https://"
           />
         );
+      case "date":
+        return (
+          <Input
+            name={question.id}
+            type="date"
+            value={answers[question.id] || ""}
+            onChange={(e) => handleAnswerChange(question.id, e.target.value)}
+          />
+        );
       default:
         return null;
     }
@@ -163,8 +173,6 @@ export default function FormPreview() {
               </Button>
             </div>
           </form>
-
-            
         </div>
       </div>
     </AnimatedContainer>

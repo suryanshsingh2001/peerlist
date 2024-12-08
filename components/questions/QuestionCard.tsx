@@ -1,3 +1,4 @@
+// components/questions/QuestionCard.tsx
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
@@ -5,20 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Button } from "@/components/ui/button";
-import {
-  Plus,
-  AlignLeft,
-  TextQuote,
-  Hash,
-  Link2,
-  ChevronDown,
-  Grip,
-  CircleDot,
-} from "lucide-react";
+import { ChevronDown, Grip, Plus } from "lucide-react";
 
 import { Question } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import QuestionTypeSelect from "./QuestionTypeSelect";
+import { QUESTION_TYPES, QuestionType } from "@/lib/questionTypes";
 
 interface QuestionCardProps {
   question: Question;
@@ -29,14 +22,6 @@ interface QuestionCardProps {
   error?: boolean;
 }
 
-const questionTypeIcons = {
-  short_answer: <AlignLeft className="h-4 w-4" />,
-  long_answer: <TextQuote className="h-4 w-4" />,
-  single_select: <CircleDot className="h-4 w-4" />,
-  number: <Hash className="h-4 w-4" />,
-  url: <Link2 className="h-4 w-4" />,
-};
-
 export default function QuestionCard({
   question,
   onUpdate,
@@ -45,7 +30,7 @@ export default function QuestionCard({
   dragHandleProps,
   error,
 }: QuestionCardProps) {
-  const handleTypeChange = (newType: string) => {
+  const handleTypeChange = (newType: QuestionType) => {
     const updatedQuestion: Question = {
       ...question,
       type: newType,
@@ -94,9 +79,9 @@ export default function QuestionCard({
                     className="hover:bg-transparent flex items-center gap-1"
                   >
                     {
-                      questionTypeIcons[
-                        question.type as keyof typeof questionTypeIcons
-                      ]
+                      QUESTION_TYPES[
+                        question.type as keyof typeof QUESTION_TYPES
+                      ].icon
                     }
                     <ChevronDown className="h-4 w-4" />
                   </Button>
@@ -166,6 +151,10 @@ export default function QuestionCard({
                 placeholder={question.placeholder || "https://"}
                 className="text-muted-foreground"
               />
+            )}
+
+            {question.type === "date" && (
+              <Input type="date" disabled className="text-muted-foreground" />
             )}
           </div>
         </div>

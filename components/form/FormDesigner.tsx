@@ -1,3 +1,4 @@
+// components/form/FormDesigner.tsx
 import React, { useState } from "react";
 import { useFormContext } from "@/context/FormContext";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,7 @@ import QuestionTypeSelect from "../questions/QuestionTypeSelect";
 import { Question } from "@/lib/types";
 import { Plus } from "lucide-react";
 import { AnimatedContainer } from "../shared/animated-container";
+import { QUESTION_TYPES, QuestionType } from "@/lib/questionTypes";
 
 export default function FormDesigner() {
   const { questions, setQuestions } = useFormContext();
@@ -21,7 +23,7 @@ export default function FormDesigner() {
     return question.question.trim() !== "";
   };
 
-  const addQuestion = (type: string) => {
+  const addQuestion = (type: QuestionType) => {
     const newQuestion: Question = {
       id: `q${questions.length + 1}`,
       type,
@@ -82,20 +84,22 @@ export default function FormDesigner() {
                   >
                     {(provided) => (
                       <div ref={provided.innerRef} {...provided.draggableProps}>
-                        <AnimatedContainer animation="slideUp" duration={0.2}
+                        <AnimatedContainer
+                          animation="slideUp"
+                          duration={0.2}
                           delay={index * 0.1}
                         >
-                        <QuestionCard
-                          question={question}
-                          onUpdate={(updatedQuestion) =>
-                            updateQuestion(index, updatedQuestion)
-                          }
-                          onDelete={() => deleteQuestion(index)}
-                          onDuplicate={() => duplicateQuestion(index)}
-                          dragHandleProps={provided.dragHandleProps}
-                          error={errors[question.id]}
-                        />
-                      </AnimatedContainer>
+                          <QuestionCard
+                            question={question}
+                            onUpdate={(updatedQuestion) =>
+                              updateQuestion(index, updatedQuestion)
+                            }
+                            onDelete={() => deleteQuestion(index)}
+                            onDuplicate={() => duplicateQuestion(index)}
+                            dragHandleProps={provided.dragHandleProps}
+                            error={errors[question.id]}
+                          />
+                        </AnimatedContainer>
                       </div>
                     )}
                   </Draggable>
@@ -106,7 +110,10 @@ export default function FormDesigner() {
           </Droppable>
         </DragDropContext>
 
-        <AnimatedContainer animation="slide" className="flex justify-center mt-4">
+        <AnimatedContainer
+          animation="slide"
+          className="flex justify-center mt-4"
+        >
           <QuestionTypeSelect onSelect={addQuestion}>
             <Button
               variant="outline"
