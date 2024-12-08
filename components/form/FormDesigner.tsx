@@ -14,6 +14,7 @@ import { Question } from "@/lib/types";
 import { Plus } from "lucide-react";
 import { AnimatedContainer } from "../shared/animated-container";
 import { QUESTION_TYPES, QuestionType } from "@/lib/questionTypes";
+import TemplateMenu from "../shared/template-menu";
 
 export default function FormDesigner() {
   const { questions, setQuestions } = useFormContext();
@@ -124,7 +125,13 @@ export default function FormDesigner() {
               Add Question
             </Button>
           </QuestionTypeSelect>
+
+
+
         </AnimatedContainer>
+
+        <TemplateMenu />
+
       </>
     </div>
   );
