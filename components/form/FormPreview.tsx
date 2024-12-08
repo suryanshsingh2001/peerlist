@@ -12,8 +12,9 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Loader } from "lucide-react";
 import { AnimatedContainer } from "../shared/animated-container";
-import {  DatePicker } from "../shared/date-picker";
+import { DatePicker } from "../shared/date-picker";
 import useLocalStorage from "@/hooks/useLocalStorage";
+import { SuccessDialog } from "../shared/sucess-dialog";
 
 export default function FormPreview() {
   const router = useRouter();
@@ -27,7 +28,8 @@ export default function FormPreview() {
     formSubmissions,
   } = useFormContext();
   const [submitting, setSubmitting] = useState(false);
-  const [localSubmissions, setLocalSubmissions] = useLocalStorage<FormSubmission[]>("formSubmissions", []);
+  const [success, setSuccess] = useState(false);
+
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -42,7 +44,7 @@ export default function FormPreview() {
       formTitle,
       questions,
       submittedAt: new Date().toLocaleString(),
-      answers: {formObject, ...answers},
+      answers: { formObject, ...answers },
     };
 
     console.log("Submitting form", submissionData);
@@ -54,20 +56,19 @@ export default function FormPreview() {
       addSubmission(submissionData);
 
 
-      setLocalSubmissions([...localSubmissions, submissionData]);
+      // toastMessage({
+      //   message: "Form submitted",
+      //   description: `Your ${formTitle} has been submitted successfully`,
+      //   action: {
+      //     label: "View Submissions",
+      //     onClick: () => {
+      //       console.log("View submissions");
+      //       router.push("/submissions");
+      //     },
+      //   },
+      // });
 
-      toastMessage({
-        message: "Form submitted",
-        description: `Your ${formTitle} has been submitted successfully`,
-        action: {
-          label: "View Submissions",
-          onClick: () => {
-            console.log("View submissions");
-            router.push("/submissions");
-          },
-        },
-      });
-
+      setSuccess(true);
       setAnswers({});
     } catch (error: any) {
       console.error("Error saving form data", error);
@@ -150,37 +151,45 @@ export default function FormPreview() {
   };
 
   return (
-    <AnimatedContainer animation="fade" duration={0.3} className="">
-      <div>
-        <div className="p-6">
-          <form onSubmit={handleSubmit} className="space-y-8">
-            {questions.map((question) => (
-              <div key={question.id} className="space-y-3">
-                <div className="space-y-1">
-                  <Label className="text-base font-semibold">
-                    {question.question}
-                  </Label>
-                  {question.helpText && (
-                    <p className="text-sm text-gray-700">{question.helpText}</p>
-                  )}
-                </div>
-                {renderQuestionInput(question)}
-              </div>
-            ))}
+    <>
+      <AnimatedContainer animation="fade" duration={0.3} className="">
+        <div>
+          <div className="p-6">
+            
 
-            <div className="flex justify-end mt-6">
-              <Button
-                disabled={submitting}
-                type="submit"
-                className="transition-all duration-300 hover:scale-105 active:scale-95"
-              >
-                {submitting && <Loader className="h-4 w-4 mr-2" />}
-                Submit
-              </Button>
-            </div>
-          </form>
+            <form onSubmit={handleSubmit} className="space-y-8">
+              {questions.map((question) => (
+                <div key={question.id} className="space-y-3">
+                  <div className="space-y-1">
+                    <Label className="text-base font-semibold">
+                      {question.question}
+                    </Label>
+                    {question.helpText && (
+                      <p className="text-sm text-gray-700">
+                        {question.helpText}
+                      </p>
+                    )}
+                  </div>
+                  {renderQuestionInput(question)}
+                </div>
+              ))}
+
+              <div className="flex justify-end mt-6">
+                <Button
+                  disabled={submitting}
+                  type="submit"
+                  className="transition-all duration-300 hover:scale-105 active:scale-95"
+                >
+                  {submitting && <Loader className="h-4 w-4 mr-2" />}
+                  Submit
+                </Button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    </AnimatedContainer>
+      </AnimatedContainer>
+
+      <SuccessDialog open={success} onClose={() => setSuccess(false)} />
+    </>
   );
 }

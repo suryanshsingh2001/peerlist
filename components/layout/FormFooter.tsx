@@ -5,8 +5,10 @@ import { useFormContext } from "@/context/FormContext";
 import { Check, FileSliders } from "lucide-react";
 import { toastMessage } from "@/lib/toast";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function DesignFormFooter() {
+  const router = useRouter();
   const { questions, formTitle } = useFormContext();
   const [completed, setCompleted] = useState(false);
   const hasQuestions = questions.length > 0;
@@ -33,6 +35,7 @@ export default function DesignFormFooter() {
           size={"sm"}
           onClick={() => {
             setCompleted(true);
+            router.push("/preview");
             toastMessage({
               message: `${formTitle ? formTitle : "Form"} published`,
               description: "Your form has been published",
