@@ -1,7 +1,6 @@
 # Peerlist Frontend Developer Assignment
 
-
-Create a Next.js application for a form builder that allows users to create, preview, fill out, and submit forms. 
+Create a Next.js application for a form builder that allows users to create, preview, fill out, and submit forms.
 
 ## Task Overview
 
@@ -40,6 +39,7 @@ Create a Next.js application for a form builder that allows users to create, pre
 ### Assumptions / Constraints
 
 - No complex validation for form fields (e.g., email, password). All fields are required by default.
+- No support for word limits in text fields.
 - No support for conditional logic in form fields.
 - Form submissions are stored in local storage, not in a database.
 - Draft forms are saved in local storage and can be retrieved later.

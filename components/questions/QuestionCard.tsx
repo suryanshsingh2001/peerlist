@@ -154,7 +154,7 @@ export default function QuestionCard({
             )}
 
             {question.type === "date" && (
-              <Input type="date" disabled className="text-muted-foreground" />
+              <Input type="date" placeholder="" disabled className="text-muted-foreground"/>
             )}
           </div>
         </div>

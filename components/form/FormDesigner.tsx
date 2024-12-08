@@ -30,7 +30,7 @@ export default function FormDesigner() {
       question: "",
       helpText: "",
       options: type === "single_select" ? ["Option 1", "Option 2"] : undefined,
-      placeholder: type === "url" ? "https://" : undefined,
+      placeholder: type === "url" ? "https://" : type === "date" ? "MM-DD-YYYY" : undefined,
     };
     setQuestions([...questions, newQuestion]);
   };

@@ -1,57 +1,72 @@
-"use client"
+"use client";
 
-import { useState, useMemo } from 'react'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { ArrowUpDown } from 'lucide-react'
-import { FormSubmission } from '@/lib/types'
+import { useState, useMemo } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { ArrowUpDown } from "lucide-react";
+import { FormSubmission } from "@/lib/types";
+import { formatDate } from "date-fns";
 
 interface FormSubmissionsTableProps {
-  submissions: FormSubmission[]
+  submissions: FormSubmission[];
 }
 
-export function FormSubmissionsTable({ submissions }: FormSubmissionsTableProps) {
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc')
-  const [searchTerm, setSearchTerm] = useState<string>('')
-  const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set())
+export function FormSubmissionsTable({
+  submissions,
+}: FormSubmissionsTableProps) {
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set());
 
   const sortedAndFilteredSubmissions = useMemo(() => {
-    let result = [...submissions]
+    let result = [...submissions];
 
     // Apply filtering by form title
     if (searchTerm) {
-      result = result.filter(submission =>
+      result = result.filter((submission) =>
         submission.formTitle.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+      );
     }
 
     // Apply sorting
     result.sort((a, b) => {
-      const dateA = new Date(a.submittedAt).getTime()
-      const dateB = new Date(b.submittedAt).getTime()
-      return sortOrder === 'asc' ? dateA - dateB : dateB - dateA
-    })
+      const dateA = new Date(a.submittedAt).getTime();
+      const dateB = new Date(b.submittedAt).getTime();
+      return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
+    });
 
-    return result
-  }, [submissions, sortOrder, searchTerm])
+    return result;
+  }, [submissions, sortOrder, searchTerm]);
 
   const toggleExpand = (id: number) => {
-    setExpandedRows(prev => {
-      const newSet = new Set(prev)
+    setExpandedRows((prev) => {
+      const newSet = new Set(prev);
       if (newSet.has(id)) {
-        newSet.delete(id)
+        newSet.delete(id);
       } else {
-        newSet.add(id)
+        newSet.add(id);
       }
-      return newSet
-    })
-  }
+      return newSet;
+    });
+  };
 
   const toggleSortOrder = () => {
-    setSortOrder(prevOrder => prevOrder === 'asc' ? 'desc' : 'asc')
-  }
+    setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
+  };
 
   return (
     <div className="space-y-4">
@@ -67,7 +82,7 @@ export function FormSubmissionsTable({ submissions }: FormSubmissionsTableProps)
           variant="outline"
           className="w-full sm:w-auto"
         >
-          {sortOrder === 'desc' ? 'Latest First' : 'Oldest First'}
+          {sortOrder === "desc" ? "Latest First" : "Oldest First"}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       </div>
@@ -82,14 +97,20 @@ export function FormSubmissionsTable({ submissions }: FormSubmissionsTableProps)
             </TableRow>
           </TableHeader>
           <TableBody>
-            {sortedAndFilteredSubmissions.map(submission => (
+            {sortedAndFilteredSubmissions.map((submission) => (
               <TableRow key={submission.id}>
                 <TableCell className="font-medium">{submission.id}</TableCell>
                 <TableCell>{submission.formTitle}</TableCell>
-                <TableCell>{submission.submittedAt}</TableCell>
                 <TableCell>
-                  <Button variant="ghost" size="sm" onClick={() => toggleExpand(submission.id)}>
-                    {expandedRows.has(submission.id) ? 'Hide' : 'See more'}
+                  {formatDate(submission.submittedAt, "MM-dd-yyyy")}
+                </TableCell>
+                <TableCell>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => toggleExpand(submission.id)}
+                  >
+                    {expandedRows.has(submission.id) ? "Hide" : "See more"}
                   </Button>
                 </TableCell>
               </TableRow>
@@ -118,7 +139,9 @@ export function FormSubmissionsTable({ submissions }: FormSubmissionsTableProps)
                       <TableCell>{question.type}</TableCell>
                       <TableCell>
                         <p>{question.question}</p>
-                        <p className="text-sm text-gray-500">{question.helpText}</p>
+                        <p className="text-sm text-gray-500">
+                          {question.helpText}
+                        </p>
                       </TableCell>
                       <TableCell>{submission.answers[question.id]}</TableCell>
                     </TableRow>
@@ -130,6 +153,5 @@ export function FormSubmissionsTable({ submissions }: FormSubmissionsTableProps)
         ))}
       </Accordion>
     </div>
-  )
+  );
 }
-

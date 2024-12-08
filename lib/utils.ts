@@ -1,6 +1,7 @@
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { Question } from "./types";
+import { format } from "date-fns";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -18,6 +19,10 @@ export const calculateProgress = (
 };
 
 
-export const formatToDateString = (date: string) => {
-  return new Date(date).toISOString().split("T")[0];
+export const formatToDateString = (date: any) => {
+  //make sure it is in indian standard time MM-DD-YYYY
+
+  return format(date, "mm-dd-yyyy");
+
+
 }
