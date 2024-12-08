@@ -7,7 +7,7 @@ import { Card } from "@/components/ui/card";
 export default function PreviewPage() {
 
   return (
-    <Card className="container flex flex-col min-h-screen mx-auto max-w-3xl rounded-none">
+    <Card className="container flex flex-col min-h-screen mx-auto max-w-2xl rounded-none">
       <PreviewHeader />
       <FormPreview />
       

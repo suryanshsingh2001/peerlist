@@ -57,7 +57,7 @@ export default function QuestionCard({
   };
 
   return (
-    <Card className={cn("mb-2 group hover:border-gray-400 transition-colors")}>
+    <Card className={cn("mb-2 group  hover:bg-gray-50  transition-colors")}>
       <CardContent className="px-3 py-2">
         <div className="flex items-start gap-2">
           <div className="flex-1 space-y-1">
@@ -76,7 +76,7 @@ export default function QuestionCard({
                 />
                 <Input
                   value={question.helpText || ""}
-                  onChange={(e) =>  
+                  onChange={(e) =>
                     onUpdate({ ...question, helpText: e.target.value })
                   }
                   placeholder="Write a help text or caption (leave empty if not needed)"
