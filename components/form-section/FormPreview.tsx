@@ -148,7 +148,7 @@ export default function FormPreview() {
             ))}
 
             <div className="flex justify-end mt-6">
-              <Button disabled={submitting} type="submit">
+              <Button disabled={submitting} type="submit" className="transition-all duration-300 hover:scale-105 active:scale-95">
                 Submit
               </Button>
             </div>

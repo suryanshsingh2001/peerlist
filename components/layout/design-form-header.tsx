@@ -21,7 +21,7 @@ export default function DesignFormHeader() {
           placeholder="Untitled form"
           className="text-lg placeholder:text-gray-400 font-semibold bg-transparent border-0 p-0 max-w-[calc(100%-100px)] focus-visible:ring-0 focus-visible:ring-offset-0"
         />
-        <Button variant="outline" disabled={!hasQuestions} className="shrink-0">
+        <Button variant="outline" disabled={!hasQuestions} className="shrink-0 transition-all duration-300 hover:scale-105 active:scale-95">
           <Link href="/preview" className="flex items-center gap-1">
             <span className="">Preview</span>
             <ArrowUpRight className="h-4 w-4" />

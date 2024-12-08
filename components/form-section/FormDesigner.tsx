@@ -11,6 +11,7 @@ import {
 import QuestionTypeSelect from "../form-block/QuestionTypeSelect";
 import { Question } from "@/lib/types";
 import { Plus } from "lucide-react";
+import { AnimatedContainer } from "../shared/animated-container";
 
 export default function FormDesigner() {
   const { questions, setQuestions } = useFormContext();
@@ -81,6 +82,9 @@ export default function FormDesigner() {
                   >
                     {(provided) => (
                       <div ref={provided.innerRef} {...provided.draggableProps}>
+                        <AnimatedContainer animation="slideUp" duration={0.2}
+                          delay={index * 0.1}
+                        >
                         <QuestionCard
                           question={question}
                           onUpdate={(updatedQuestion) =>
@@ -91,6 +95,7 @@ export default function FormDesigner() {
                           dragHandleProps={provided.dragHandleProps}
                           error={errors[question.id]}
                         />
+                      </AnimatedContainer>
                       </div>
                     )}
                   </Draggable>
@@ -101,14 +106,18 @@ export default function FormDesigner() {
           </Droppable>
         </DragDropContext>
 
-        <div className="flex justify-center mt-4">
+        <AnimatedContainer animation="slide" className="flex justify-center mt-4">
           <QuestionTypeSelect onSelect={addQuestion}>
-            <Button variant="outline" size="sm">
-              <Plus className=" h-5 w-5" />
+            <Button
+              variant="outline"
+              size="sm"
+              className="transition-all duration-300 hover:scale-105 active:scale-95"
+            >
+              <Plus className="h-5 w-5" />
               Add Question
             </Button>
           </QuestionTypeSelect>
-        </div>
+        </AnimatedContainer>
       </>
     </div>
   );

@@ -21,6 +21,7 @@ export default function DesignFormFooter() {
           }
           size={"sm"}
           variant="outline"
+          className="transition-all duration-300 hover:scale-105 active:scale-95"
           disabled={!hasQuestions}
         >
           <FileSliders className="h-3 w-3" />
@@ -34,6 +35,7 @@ export default function DesignFormFooter() {
               description: "Your form has been published",
             });
           }}
+          className="transition-all duration-300 hover:scale-105 active:scale-95"
           disabled={!hasQuestions}
         >
           <Check className="h-3 w-3" />
