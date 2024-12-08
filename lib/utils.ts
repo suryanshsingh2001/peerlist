@@ -16,3 +16,8 @@ export const calculateProgress = (
   ).length;
   return Math.round((answeredQuestions / questions.length) * 100);
 };
+
+
+export const formatToDateString = (date: string) => {
+  return new Date(date).toISOString().split("T")[0];
+}

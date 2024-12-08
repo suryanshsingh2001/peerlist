@@ -25,7 +25,7 @@ export default function FormDesigner() {
 
   const addQuestion = (type: QuestionType) => {
     const newQuestion: Question = {
-      id: `q${questions.length + 1}`,
+      id: `Q${questions.length + 1}`,
       type,
       question: "",
       helpText: "",

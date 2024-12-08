@@ -1,6 +1,8 @@
+import { QuestionType } from "./questionTypes";
+
 export interface Question {
   id: string;
-  type: string;
+  type: QuestionType;
   question: string;
   helpText?: string;
   required?: boolean;

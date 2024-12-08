@@ -12,6 +12,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Loader } from "lucide-react";
 import { AnimatedContainer } from "../shared/animated-container";
+import {  DatePickerDemo } from "../shared/date-picker";
 
 export default function FormPreview() {
   const router = useRouter();
@@ -39,8 +40,10 @@ export default function FormPreview() {
       formTitle,
       questions,
       submittedAt: new Date().toLocaleString(),
-      answers: formObject,
+      answers: {formObject, ...answers},
     };
+
+    console.log("Submitting form", submissionData);
 
     try {
       const response = await axios.post("/api/saveForm", submissionData);
@@ -73,7 +76,7 @@ export default function FormPreview() {
   }
 
   const handleAnswerChange = (questionId: string, value: string) => {
-    console.log("handleAnswerChange", questionId, value);
+    console.log("handleAnswerChange", questionId, value, typeof value);
     mergeAnswers({ [questionId]: value });
   };
 
@@ -131,11 +134,9 @@ export default function FormPreview() {
         );
       case "date":
         return (
-          <Input
-            name={question.id}
-            type="date"
-            value={answers[question.id] || ""}
-            onChange={(e) => handleAnswerChange(question.id, e.target.value)}
+          <DatePickerDemo
+            selectedDate={answers[question.id]}
+            onDateChange={(date) => handleAnswerChange(question.id, date)}
           />
         );
       default:
