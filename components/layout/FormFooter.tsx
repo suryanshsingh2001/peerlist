@@ -4,9 +4,11 @@ import { Button } from "@/components/ui/button";
 import { useFormContext } from "@/context/FormContext";
 import { Check, FileSliders } from "lucide-react";
 import { toastMessage } from "@/lib/toast";
+import { useState } from "react";
 
 export default function DesignFormFooter() {
   const { questions, formTitle } = useFormContext();
+  const [completed, setCompleted] = useState(false);
   const hasQuestions = questions.length > 0;
 
   return (
@@ -30,16 +32,23 @@ export default function DesignFormFooter() {
         <Button
           size={"sm"}
           onClick={() => {
+            setCompleted(true);
             toastMessage({
               message: `${formTitle ? formTitle : "Form"} published`,
               description: "Your form has been published",
             });
           }}
           className="transition-all duration-300 hover:scale-105 active:scale-95"
-          disabled={!hasQuestions}
+          disabled={!hasQuestions || completed}
         >
-          <Check className="h-3 w-3" />
-          Publish Form
+          {completed ? (
+            "Published"
+          ) : (
+            <>
+              <Check className="h-3 w-3" />
+              Publish Form
+            </>
+          )}
         </Button>
       </div>
     </>

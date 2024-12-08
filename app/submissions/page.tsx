@@ -1,6 +1,6 @@
 "use client";
 
-import { FormSubmissionsTable } from "@/components/form-section/FormSubmissionsTable";
+import { FormSubmissionsTable } from "@/components/form/FormSubmissionsTable";
 import { useFormContext } from "@/context/FormContext";
 
 export default function FormSubmissionsPage() {

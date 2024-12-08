@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useFormContext } from "@/context/FormContext";
 import { Button } from "@/components/ui/button";
-import QuestionCard from "../form-block/QuestionCard";
+import QuestionCard from "../questions/QuestionCard";
 import {
   DragDropContext,
   Droppable,
   Draggable,
   DropResult,
 } from "@hello-pangea/dnd";
-import QuestionTypeSelect from "../form-block/QuestionTypeSelect";
+import QuestionTypeSelect from "../questions/QuestionTypeSelect";
 import { Question } from "@/lib/types";
 import { Plus } from "lucide-react";
 import { AnimatedContainer } from "../shared/animated-container";

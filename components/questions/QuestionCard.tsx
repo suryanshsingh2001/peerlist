@@ -57,12 +57,12 @@ export default function QuestionCard({
   };
 
   return (
-    <Card className={cn("mb-2 group  hover:bg-gray-50  transition-colors")}>
+    <Card className={cn("mb-3 group  hover:bg-gray-50  transition-colors")}>
       <CardContent className="px-3 py-2">
         <div className="flex items-start gap-2">
           <div className="flex-1 space-y-1">
             <div className="flex items-start justify-between">
-              <div className="flex-1 mb-1">
+              <div className="flex-1  mb-1">
                 <Input
                   value={question.question}
                   onChange={(e) =>

@@ -1,6 +1,6 @@
 "use client";
 
-import FormPreview from "@/components/form-section/FormPreview";
+import FormPreview from "@/components/form/FormPreview";
 import PreviewHeader from "@/components/layout/PreviewHeader";
 import { Card } from "@/components/ui/card";
 

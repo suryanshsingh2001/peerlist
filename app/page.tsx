@@ -1,7 +1,7 @@
 "use client";
-import DesignFormHeader from "@/components/layout/design-form-header";
-import DesignFormFooter from "@/components/layout/design-form-footer";
-import FormDesigner from "@/components/form-section/FormDesigner";
+import DesignFormHeader from "@/components/layout/FormHeader";
+import DesignFormFooter from "@/components/layout/FormFooter";
+import FormDesigner from "@/components/form/FormDesigner";
 import { Card } from "@/components/ui/card";
 export default function Home() {
   return (

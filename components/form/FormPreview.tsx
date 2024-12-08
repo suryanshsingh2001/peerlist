@@ -9,6 +9,7 @@ import { Question } from "@/lib/types";
 import { toastMessage } from "@/lib/toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { Loader } from "lucide-react";
 
 export default function FormPreview() {
   const router = useRouter();
@@ -16,6 +17,7 @@ export default function FormPreview() {
     questions,
     answers,
     mergeAnswers,
+    setAnswers,
     formTitle,
     addSubmission,
     formSubmissions,
@@ -55,6 +57,11 @@ export default function FormPreview() {
           },
         },
       });
+
+
+      setAnswers({});
+      
+
     } catch (error: any) {
       console.error("Error saving form data", error);
       toastMessage({
@@ -149,6 +156,7 @@ export default function FormPreview() {
 
             <div className="flex justify-end mt-6">
               <Button disabled={submitting} type="submit" className="transition-all duration-300 hover:scale-105 active:scale-95">
+                {submitting && <Loader className="h-4 w-4 mr-2" />}
                 Submit
               </Button>
             </div>
