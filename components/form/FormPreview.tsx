@@ -6,13 +6,14 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
-import { Question } from "@/lib/types";
+import { FormSubmission, Question } from "@/lib/types";
 import { toastMessage } from "@/lib/toast";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { Loader } from "lucide-react";
 import { AnimatedContainer } from "../shared/animated-container";
-import {  DatePickerDemo } from "../shared/date-picker";
+import {  DatePicker } from "../shared/date-picker";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 export default function FormPreview() {
   const router = useRouter();
@@ -26,6 +27,7 @@ export default function FormPreview() {
     formSubmissions,
   } = useFormContext();
   const [submitting, setSubmitting] = useState(false);
+  const [localSubmissions, setLocalSubmissions] = useLocalStorage<FormSubmission[]>("formSubmissions", []);
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -50,6 +52,9 @@ export default function FormPreview() {
       console.log("Form saved successfully", response.data);
 
       addSubmission(submissionData);
+
+
+      setLocalSubmissions([...localSubmissions, submissionData]);
 
       toastMessage({
         message: "Form submitted",
@@ -134,7 +139,7 @@ export default function FormPreview() {
         );
       case "date":
         return (
-          <DatePickerDemo
+          <DatePicker
             selectedDate={answers[question.id]}
             onDateChange={(date) => handleAnswerChange(question.id, date)}
           />

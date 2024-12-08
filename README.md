@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Form Builder Application
+
+## Task Overview
+
+Create a Next.js application for a form builder that allows users to create, preview, fill out, and submit forms.
+
+## Task Overview
+
+### Functional Requirements
+
+- [ ] Implement form creation UI with 6 question types (short answer, long answer, single select, number, URL, date)
+- [ ] Implement questiom, card states (active, inactive, hover, error) along with 
+- [ ] Implement form preview with fill-out capability and completeness percentage.
+- [ ] Implement form submission with success message.
+- [ ] Implement a API to save the form data
+- [ ] Implement a page to view submitted forms in a table
+
+### Non-Functional Requirements
+
+- [ ] Use Next.js for the application
+- [ ] Use TypeScript or JavaScript
+- [ ] Use TailwindCSS for the UI
+- [ ] Host the application and include the live link in the GitHub repository README or when submitting the assignment
+- [ ] Maintain a clean commit history throughout the development process
+- [ ] Ensure the app is pixel-perfect and mobile-responsive
+
+### Bonus Points
+
+- [ ] Add interactions or animations on UI actions
+- [ ] Add functionality to re-order the form questions
+- [ ] Use an API for saving the form data
+- [ ] Show submitted forms in a table
+
+### Assumptions
+
+- [ ] Mention any assumptions made for the sake of this assignment either in the README or in the email of assignment submission
+
+## Pages Breakdown
+
+### 1. Form Creation Page
+
+- **Path:** `/create`
+- **Description:** This page allows users to create a new form by selecting input types and adding questions. Users can add questions of different types (short answer, long answer, single select, number, URL, date).
+
+### 2. Form Preview Page
+
+- **Path:** `/preview`
+- **Description:** This page displays a preview of the created form. Users can fill out the form and see the completeness percentage. The form can be submitted from this page.
+
+### 3. Form Submissions Page
+
+- **Path:** `/submissions`
+- **Description:** This page displays a table of submitted forms. Each row in the table represents a submitted form with details such as submission date and form title.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js
+- npm or yarn
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd form-builder

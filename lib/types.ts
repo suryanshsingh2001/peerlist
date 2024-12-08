@@ -17,3 +17,8 @@ export interface FormSubmission {
   answers: Record<string, string> | any;
   questions: Question[];
 }
+
+export interface FormTemplate {
+  formTitle: string;
+  questions: Question[];
+}

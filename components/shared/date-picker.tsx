@@ -19,7 +19,7 @@ interface DatePickerDemoProps {
   onDateChange: (date: string) => void;
 }
 
-export function DatePickerDemo({ selectedDate, onDateChange }: DatePickerDemoProps) {
+export function DatePicker({ selectedDate, onDateChange }: DatePickerDemoProps) {
   const date = selectedDate ? new Date(selectedDate) : undefined;
 
   return (
