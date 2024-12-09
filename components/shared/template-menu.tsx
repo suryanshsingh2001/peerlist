@@ -44,7 +44,7 @@ export default function TemplateMenu() {
             }}
             className="text-muted-foreground text-center cursor-pointer p-2 mt-2"
           >
-            or select a <span className="text-primary">template</span>
+            or start from  a <span className="text-primary">template</span>
           </span>
         </AnimatedContainer>
       )}

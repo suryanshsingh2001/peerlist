@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { ArrowUpDown, Eye } from 'lucide-react'
 import { FormSubmission } from '@/lib/types'
+import { QUESTION_TYPES } from '@/lib/questionTypes'
 
 interface FormSubmissionsTableProps {
   submissions: FormSubmission[]
@@ -76,7 +77,7 @@ export function FormSubmissionsTable({ submissions }: FormSubmissionsTableProps)
                   <Dialog>
                     <DialogTrigger asChild>
                       <Button variant="ghost" size="sm">
-                        <Eye className="h-4 w-4 mr-2" />
+                        <Eye className="h-4 w-4" />
                         View
                       </Button>
                     </DialogTrigger>
@@ -88,10 +89,11 @@ export function FormSubmissionsTable({ submissions }: FormSubmissionsTableProps)
                         {submission.questions.map((question) => (
                           <div key={question.id} className="bg-muted/30 p-4 rounded-md shadow-sm">
                             <div className="flex justify-between items-start mb-2">
-                              <h5 className="font-medium text-primary">{question.question}</h5>
-                              <span className="text-sm text-muted-foreground bg-muted px-2 py-1 rounded-full">
-                                {question.type}
-                              </span>
+                              <h5 className="font-medium">{question.question}</h5>
+                                <span className="text-sm text-muted-foreground bg-muted px-2 py-1 rounded-full flex items-center space-x-2">
+                                {QUESTION_TYPES[question.type].icon}
+                                <span>{QUESTION_TYPES[question.type].label}</span>
+                                </span>
                             </div>
                             {question.helpText && (
                               <p className="text-sm text-muted-foreground mb-2">{question.helpText}</p>

@@ -15,6 +15,7 @@ import { Plus } from "lucide-react";
 import { AnimatedContainer } from "../shared/animated-container";
 import { QUESTION_TYPES, QuestionType } from "@/lib/questionTypes";
 import TemplateMenu from "../shared/template-menu";
+import { toastMessage } from "@/lib/toast";
 
 export default function FormDesigner() {
   const { questions, setQuestions } = useFormContext();
@@ -31,7 +32,12 @@ export default function FormDesigner() {
       question: "",
       helpText: "",
       options: type === "single_select" ? ["Option 1", "Option 2"] : undefined,
-      placeholder: type === "url" ? "https://" : type === "date" ? "MM-DD-YYYY" : undefined,
+      placeholder:
+        type === "url"
+          ? "https://"
+          : type === "date"
+          ? "MM-DD-YYYY"
+          : undefined,
     };
     setQuestions([...questions, newQuestion]);
   };
@@ -49,6 +55,8 @@ export default function FormDesigner() {
   const deleteQuestion = (index: number) => {
     const newQuestions = questions.filter((_, i) => i !== index);
     setQuestions(newQuestions);
+
+    toastMessage({ message: "Question deleted" });
   };
 
   const duplicateQuestion = (index: number) => {
@@ -60,6 +68,8 @@ export default function FormDesigner() {
     const newQuestions = [...questions];
     newQuestions.splice(index + 1, 0, duplicatedQuestion);
     setQuestions(newQuestions);
+    toastMessage({ message: "Question duplicated" });
+
   };
 
   const handleDragEnd = (result: DropResult) => {
@@ -125,13 +135,9 @@ export default function FormDesigner() {
               Add Question
             </Button>
           </QuestionTypeSelect>
-
-
-
         </AnimatedContainer>
 
         <TemplateMenu />
-
       </>
     </div>
   );
