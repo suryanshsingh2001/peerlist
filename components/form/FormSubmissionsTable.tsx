@@ -1,72 +1,42 @@
-"use client";
+"use client"
 
-import { useState, useMemo } from "react";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { ArrowUpDown } from "lucide-react";
-import { FormSubmission } from "@/lib/types";
-import { formatDate } from "date-fns";
+import { useState, useMemo } from 'react'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { ArrowUpDown, Eye } from 'lucide-react'
+import { FormSubmission } from '@/lib/types'
 
 interface FormSubmissionsTableProps {
-  submissions: FormSubmission[];
+  submissions: FormSubmission[]
 }
 
-export function FormSubmissionsTable({
-  submissions,
-}: FormSubmissionsTableProps) {
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [expandedRows, setExpandedRows] = useState<Set<number>>(new Set());
+export function FormSubmissionsTable({ submissions }: FormSubmissionsTableProps) {
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc')
+  const [searchTerm, setSearchTerm] = useState<string>('')
 
   const sortedAndFilteredSubmissions = useMemo(() => {
-    let result = [...submissions];
+    let result = [...submissions]
 
-    // Apply filtering by form title
     if (searchTerm) {
-      result = result.filter((submission) =>
+      result = result.filter(submission =>
         submission.formTitle.toLowerCase().includes(searchTerm.toLowerCase())
-      );
+      )
     }
 
-    // Apply sorting
     result.sort((a, b) => {
-      const dateA = new Date(a.submittedAt).getTime();
-      const dateB = new Date(b.submittedAt).getTime();
-      return sortOrder === "asc" ? dateA - dateB : dateB - dateA;
-    });
+      const dateA = new Date(a.submittedAt).getTime()
+      const dateB = new Date(b.submittedAt).getTime()
+      return sortOrder === 'asc' ? dateA - dateB : dateB - dateA
+    })
 
-    return result;
-  }, [submissions, sortOrder, searchTerm]);
-
-  const toggleExpand = (id: number) => {
-    setExpandedRows((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(id)) {
-        newSet.delete(id);
-      } else {
-        newSet.add(id);
-      }
-      return newSet;
-    });
-  };
+    return result
+  }, [submissions, sortOrder, searchTerm])
 
   const toggleSortOrder = () => {
-    setSortOrder((prevOrder) => (prevOrder === "asc" ? "desc" : "asc"));
-  };
+    setSortOrder(prevOrder => prevOrder === 'asc' ? 'desc' : 'asc')
+  }
 
   return (
     <div className="space-y-4">
@@ -82,7 +52,7 @@ export function FormSubmissionsTable({
           variant="outline"
           className="w-full sm:w-auto"
         >
-          {sortOrder === "desc" ? "Latest First" : "Oldest First"}
+          {sortOrder === 'desc' ? 'Latest First' : 'Oldest First'}
           <ArrowUpDown className="ml-2 h-4 w-4" />
         </Button>
       </div>
@@ -97,61 +67,47 @@ export function FormSubmissionsTable({
             </TableRow>
           </TableHeader>
           <TableBody>
-            {sortedAndFilteredSubmissions.map((submission) => (
+            {sortedAndFilteredSubmissions.map(submission => (
               <TableRow key={submission.id}>
                 <TableCell className="font-medium">{submission.id}</TableCell>
                 <TableCell>{submission.formTitle}</TableCell>
+                <TableCell>{submission.submittedAt}</TableCell>
                 <TableCell>
-                  {formatDate(submission.submittedAt, "MM-dd-yyyy")}
-                </TableCell>
-                <TableCell>
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={() => toggleExpand(submission.id)}
-                  >
-                    {expandedRows.has(submission.id) ? "Hide" : "See more"}
-                  </Button>
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="ghost" size="sm">
+                        <Eye className="h-4 w-4 mr-2" />
+                        View
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+                      <DialogHeader>
+                        <DialogTitle>{submission.formTitle} - Submission Details</DialogTitle>
+                      </DialogHeader>
+                      <div className="mt-4 space-y-4">
+                        {submission.questions.map((question) => (
+                          <div key={question.id} className="bg-muted/30 p-4 rounded-md shadow-sm">
+                            <div className="flex justify-between items-start mb-2">
+                              <h5 className="font-medium text-primary">{question.question}</h5>
+                              <span className="text-sm text-muted-foreground bg-muted px-2 py-1 rounded-full">
+                                {question.type}
+                              </span>
+                            </div>
+                            {question.helpText && (
+                              <p className="text-sm text-muted-foreground mb-2">{question.helpText}</p>
+                            )}
+                            <p className="bg-background p-2 rounded">{submission.answers[question.id]}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </DialogContent>
+                  </Dialog>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </div>
-      <Accordion type="multiple" value={Array.from(expandedRows).map(String)}>
-        {sortedAndFilteredSubmissions.map((submission) => (
-          <AccordionItem key={submission.id} value={String(submission.id)}>
-            <AccordionTrigger className="hidden">Details</AccordionTrigger>
-            <AccordionContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-1/4">Question ID</TableHead>
-                    <TableHead className="w-1/4">Question Type</TableHead>
-                    <TableHead className="w-1/4">Question</TableHead>
-                    <TableHead className="w-1/4">Answer</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {submission.questions.map((question) => (
-                    <TableRow key={question.id}>
-                      <TableCell>{question.id}</TableCell>
-                      <TableCell>{question.type}</TableCell>
-                      <TableCell>
-                        <p>{question.question}</p>
-                        <p className="text-sm text-gray-500">
-                          {question.helpText}
-                        </p>
-                      </TableCell>
-                      <TableCell>{submission.answers[question.id]}</TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-      </Accordion>
     </div>
-  );
+  )
 }
