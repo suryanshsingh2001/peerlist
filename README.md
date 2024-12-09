@@ -1,32 +1,33 @@
+# 🚀 Peerlist Frontend Developer Assignment
 
-# Peerlist Frontend Developer Assignment
+<a href='https://peerlist-vert.vercel.app/' target="_blank"><img alt='Live Link' src='https://img.shields.io/badge/Live_Link-100000?style=for-the-badge&logo=Live Link&logoColor=white&labelColor=black&color=1CC03F'/></a>
 
-## Introduction  
-This assignment involves creating a Next.js application for a form builder that allows users to create, preview, fill out, and submit forms.
-
-
+https://github.com/user-attachments/assets/a54ad752-5de0-4e70-ac04-5669cc6a870e
 
 
-
----
-## Table of Contents
-
-- [Introduction](#introduction)
-- [Screenshots](#screenshots)
-- [Key Features](#key-features)
-- [Extra Features](#extra-features)
-- [Tech Stack](#tech-stack)
-- [Design Philosophy](#design-philosophy)
-- [Business Logic](#business-logic)
-- [State Management](#state-management)
-- [Setup Instructions](#setup-instructions)
-- [Project Structure](#project-structure)
-- [Assumptions and Constraints](#assumptions-and-constraints)
-
+## 📚 Introduction  
+This assignment involves creating a Next.js application for a form builder that allows users to create, preview, fill out, and view submitted forms.
 
 ---
 
-## Screenshots
+## 📖 Table of Contents
+
+- [📚 Introduction](#📚-introduction)
+- [🖼️ Screenshots](#🖼️-screenshots)
+- [✨ Key Features](#✨-key-features)
+- [🎁 Extra Features](#🎁-extra-features)
+- [🛠️ Tech Stack](#🛠️-tech-stack)
+- [🎨 Design Philosophy](#🎨-design-philosophy)
+- [🔄 Business Logic](#🔄-business-logic)
+- [📦 State Management](#📦-state-management)
+- [⚙️ Setup Instructions](#⚙️-setup-instructions)
+- [📂 Project Structure](#📂-project-structure)
+- [📌 Assumptions and Constraints](#📌-assumptions-and-constraints)
+
+
+---
+
+## 🖼️ Screenshots
 
 <table>
    <tr>
@@ -61,10 +62,9 @@ This assignment involves creating a Next.js application for a form builder that 
    </tr>
 </table>
 
+---
 
-
-
-## Key Features  
+## ✨ Key Features  
 
 ### Functional Requirements  
 - [X] **Form Creation:**  
@@ -91,7 +91,7 @@ This assignment involves creating a Next.js application for a form builder that 
 
 ---
 
-## Extra Features  
+## 🎁 Extra Features  
 - **Templates:** Start with pre-built forms.  
 - **Question Management:** Duplicate or delete questions.  
 - **Reset:** Clear all fields with a reset button.  
@@ -99,7 +99,7 @@ This assignment involves creating a Next.js application for a form builder that 
 
 ---
 
-## Tech Stack  
+## 🛠️ Tech Stack  
 
 - **Framework:** Next.js with TypeScript.  
 - **Styling:** Tailwind CSS and Shadcn UI.  
@@ -108,7 +108,7 @@ This assignment involves creating a Next.js application for a form builder that 
 
 ---
 
-## Design Philosophy  
+## 🎨 Design Philosophy  
 
 The design follows a **minimalistic, centered layout** inspired by [peerlist.io](https://peerlist.io).  
 
@@ -121,7 +121,7 @@ Key principles include:
 
 ---
 
-## Business Logic  
+## 🔄 Business Logic  
 
 ### 1. Form Creation Page  
 **Purpose:** Build and organize the form.  
@@ -153,7 +153,7 @@ Key principles include:
 
 ---
 
-## State Management  
+## 📦 State Management  
 
 State is managed using the **Context API**, centralized in `FormContext`. It handles:  
 - Form title and questions.  
@@ -162,7 +162,7 @@ State is managed using the **Context API**, centralized in `FormContext`. It han
 
 ---
 
-## Setup Instructions  
+## ⚙️ Setup Instructions  
 
 1. **Install Dependencies:**  
    ```bash
@@ -177,7 +177,7 @@ State is managed using the **Context API**, centralized in `FormContext`. It han
 
 ---
 
-## Project Structure  
+## 📂 Project Structure  
 
 ```plaintext
 /app
@@ -220,7 +220,7 @@ State is managed using the **Context API**, centralized in `FormContext`. It han
 
 ---
 
-## Assumptions and Constraints  
+## 📌 Assumptions and Constraints  
 
 - **Icon Selection:** Closest available icons used if mockup icons are unavailable.  
 - **Validation:** Basic, all fields are required. No complex validations (e.g., email).  
@@ -228,4 +228,12 @@ State is managed using the **Context API**, centralized in `FormContext`. It han
 - **Save as Draft:** Placeholder functionality; no persistent storage.  
 - **Publishing:** Redirects to the preview page.  
 
---- 
+---
+
+
+## About Me 
+
+- **Name:** Suryansh Singh
+- **GitHub:** [suryanshsingh2001](https://github.com/suryanshsingh2001)
+- **LinkedIn:** [Suryansh Singh](https://www.linkedin.com/in/suryansh-singh-473187235)
+- **Portfolio:** [Suryansh Singh](https://www.surydev.site/)
