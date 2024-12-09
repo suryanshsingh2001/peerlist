@@ -1,151 +1,172 @@
+
 # Peerlist Frontend Developer Assignment
 
-Create a Next.js application for a form builder that allows users to create, preview, fill out, and submit forms.
-
-
-## Design Philosophy
-
-The design philosophy is inspired by peerlist.io, featuring a centered, minimalistic layout focused on usability and functionality. The primary color is green, with white as the secondary color. The design emphasizes readability with ample white space, simple typography, rounded corners, and shadows. Micro-interactions enhance user engagement.
-
-## Task Overview
-
-### Functional Requirements
-
-- [ ] Create a new form by selecting input types and adding questions (short answer, long answer, single select, number, URL, date)
-- [ ] Add a title for the form.
-- [ ] Change the question type after adding a question by clicking on the question type icon and selecting a different type from the dropdown menu.
-- [ ] Reorder the questions in the form creation page using drag and drop functionality.
-- [ ] Publish or save the form as a draft.
-- [ ] Preview the created form and fill it out.
-- [ ] See the completeness percentage of the form while filling it out.
-- [ ] Submit the form and see a success message after submission.
-- [ ] View submitted forms in a table with details such as submission date and form title and view the submitted form details.
-
-### Non-Functional Requirements
-
-- [ ] Ensure responsiveness and compatibility with mobile devices.
-- [ ] Follow best practices for web accessibility.
-- [ ] Include visually appealing elements with micro-interactions.
-- [ ] Maintain consistent application state throughout the user experience.
-- [ ] Design the system to be easily extendable for adding more question types in the future.
-
-### Extra Features
-
-- [ ] Template forms that users can select to start from instead of creating a form from scratch.
-- [ ] Feature to duplicate or delete a question in the form creation page.
-- [ ] Reset button to clear all the form fields in the form creation page.
-- [ ] Sorting and searching options in the form submissions page.
-
-### Tech Stack Used
-
-- Nextjs/Typescript
-- Tailwind CSS
-- Shadcn UI
-- Framer Motion
-- Context API for state management
-
-### Assumptions / Constraints
-
-- Icons may not match with the mockup, so the closest available icons are used.
-- No complex validation for form fields (e.g., email, password). All fields are required by default.
-- No support for word limits in text fields.
-- No support for conditional logic in form fields.
-- Save as draft only triggers a response message and does not save the form.
-- Publishing a form redirects the user to the form preview page, but preview is also available in the form creation page.
+## Introduction  
+This assignment involves creating a Next.js application for a form builder that allows users to create, preview, fill out, and submit forms. The application includes features like form creation, question types, form preview, form submissions, and more.
 
 
 ---
 
-## Buissness Logic
+## Key Features  
 
-### Form Creation Page
+### Functional Requirements  
+- [X] **Form Creation:**  
+  - [X] Add input types and questions (e.g., Short Answer, Long Answer, Single Select, Number, URL, Date) and title for the form.  
+  - [X] Modify question types via a dropdown menu.  
+  - [X] Drag-and-drop functionality to reorder questions.  
+  - [X] Save the form as a draft or publish it.  
 
-This page is where the user can create a new form by adding questions and selecting input types. The user can also reorder the questions and change the question type after adding a question. The user can save the form as a draft or publish it.
+- [X] **Form Preview and Submission:**  
+  - [X] Preview the form before publishing.  
+  - [X] Fill out the form with a completeness progress indicator.  
+  - [X] Submit the form and view a success message.  
 
-**_Components_**
+- [X] **View Submissions:**  
+  - [X] Access a table of submitted forms showing details like submission date and title.  
+  - [X] View specific submission details.  
 
-- `FormHeader.tsx`
-- `FormDesigner.tsx`
-- `FormFooter.tsx`
+### Non-Functional Requirements  
+- [X] Responsive design for mobile and desktop.  
+- [X] Web accessibility best practices.  
+- [X] Seamless micro-interactions for enhanced user experience.  
+- [X] Consistent application state management.  
+- [X] Scalability for future extensions (e.g., additional question types).  
 
-### Form Preview Page
+---
 
-This page is where the user can preview the created form and fill it out. The user can see the completeness percentage of the form while filling it out.
+## Extra Features  
+- **Templates:** Start with pre-built forms.  
+- **Question Management:** Duplicate or delete questions.  
+- **Reset:** Clear all fields with a reset button.  
+- **Enhanced Submissions:** Sort and search through form submissions.  
 
-**_Components_**
+---
 
-- `FormHeader.tsx`
-- `FormPreview.tsx`
+## Tech Stack  
 
-### Form Submissions Page
+- **Framework:** Next.js with TypeScript.  
+- **Styling:** Tailwind CSS and Shadcn UI.  
+- **Animation:** Framer Motion.  
+- **State Management:** Context API.  
 
-This page is where the user can view submitted forms in a table with details such as submission date and form title and view the submitted form details.
+---
 
-**Components**
+## Design Philosophy  
 
-- `FormSubmissions.tsx`
+The design follows a **minimalistic, centered layout** inspired by [peerlist.io](https://peerlist.io). Key principles include:  
+- **Colors:** Green as primary, white as secondary.  
+- **Typography:** Simple and readable.  
+- **Space:** Generous white space for clarity.  
+- **UI Elements:** Rounded corners and subtle shadows.  
+- **Micro-interactions:** Engaging, non-intrusive animations.  
 
-### State Management
+---
 
-The application uses the Context API for state management. The `FormContext` provider is used to manage the form state, including the form title, questions, and form submissions data.
+## Business Logic  
 
-## Getting Started
+### 1. Form Creation Page  
+**Purpose:** Build and organize the form.  
+- Add/edit/delete questions.  
+- Change question types.  
+- Reorder using drag-and-drop.  
+- Save drafts or publish.  
 
-1. Install dependencies:
+**Components:**  
+- `FormHeader.tsx`  
+- `FormDesigner.tsx`  
+- `FormFooter.tsx`  
 
+### 2. Form Preview Page  
+**Purpose:** Preview and fill out the form.  
+- Progress bar for form completion.  
+
+**Components:**  
+- `FormHeader.tsx`  
+- `FormPreview.tsx`  
+
+### 3. Form Submissions Page  
+**Purpose:** Manage submitted forms.  
+- View submission details.  
+- Sort and search submissions.  
+
+**Components:**  
+- `FormSubmissions.tsx`  
+
+---
+
+## State Management  
+
+State is managed using the **Context API**, centralized in `FormContext`. It handles:  
+- Form title and questions.  
+- Form answers.  
+- Submitted form data.  
+
+---
+
+## Setup Instructions  
+
+1. **Install Dependencies:**  
    ```bash
    npm install
-   ```
+   ```  
 
-2. Run the development server:
+2. **Run the Development Server:**  
    ```bash
    npm run dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   ```  
+   Open [http://localhost:3000](http://localhost:3000) in your browser.  
 
 ---
 
-## Folder Structure
+## Project Structure  
 
-The project is structured as follows:
-
-```sh
+```plaintext
 /app
-   - /api                    # Mock API routes
-      - saveForm
-         - route.ts
-   - /preview                # Form preview page
-      - page.tsx
-   - /submissions          # Form submissions page
-      - page.tsx
-   - layout.tsx
-   - page.tsx              # Form creation page
-   - styles
-      - globals.css
+   ├── /api                # Mock API routes
+   │     └── saveForm
+   │         └── route.ts
+   ├── /preview            # Form preview page
+   │     └── page.tsx
+   ├── /submissions        # Form submissions page
+   │     └── page.tsx
+   ├── layout.tsx          # Main layout
+   └── page.tsx            # Form creation page
 /components
-   - /form                # Form related components
-      - FormDesigner.tsx
-      - FormPreview.tsx
-      - FormSubmissions.tsx
-   - /layout             # Layout components
-      - FormHeader.tsx
-      - FormFooter.tsx
-      - PreviewHeader.tsx
-   - /question           # Question related components
-      - QuestionCard.tsx
-      - QuestionMenu.tsx
-      - QuestionTypeSelect.tsx
-   - /shared            # Shared components
-      - animated-container.tsx
-      - template-menu.tsx
-      - reset-button.tsx
-   - /ui
-/context               # Context API for state management
-   - FormContext.tsx
-/lib                   # Utility functions
-   - formTemplates.ts
-   - questionTypes.ts
-   - types.ts
-```
+   ├── /form               # Core form components
+   │     ├── FormDesigner.tsx
+   │     ├── FormPreview.tsx
+   │     └── FormSubmissions.tsx
+   ├── /layout             # Layout components
+   │     ├── FormHeader.tsx
+   │     ├── FormFooter.tsx
+   │     └── PreviewHeader.tsx
+   ├── /question           # Question-related components
+   │     ├── QuestionCard.tsx
+   │     ├── QuestionMenu.tsx
+   │     └── QuestionTypeSelect.tsx
+   ├── /shared             # Shared components
+   │     ├── animated-container.tsx
+   │     ├── template-menu.tsx
+   │     └── reset-button.tsx
+   └── /ui                 # UI-specific components
+/context                   # State management
+   └── FormContext.tsx
+/lib                       # Utility functions and types
+   ├── formTemplates.ts
+   ├── questionTypes.ts
+   └── types.ts
+/styles                    # Global styles
+   └── globals.css
+```  
 
 ---
+
+## Assumptions and Constraints  
+
+- **Icon Selection:** Closest available icons used if mockup icons are unavailable.  
+- **Validation:** Basic, all fields are required. No complex validations (e.g., email).  
+- **Conditional Logic:** Not supported in this version.  
+- **Save as Draft:** Placeholder functionality; no persistent storage.  
+- **Publishing:** Redirects to the preview page.  
+
+--- 
