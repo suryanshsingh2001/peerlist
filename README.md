@@ -7,6 +7,44 @@ This assignment involves creating a Next.js application for a form builder that 
 
 ---
 
+## Screenshots
+
+<table>
+   <tr>
+      <td>
+         <img src="https://github.com/suryanshsingh2001/Zemetric/blob/main/showcase/dashboard.png" alt="Dashboard" width="400"/><br/>
+         <p style="text-align:center;">Dashboard</p>
+      </td>
+      <td>
+         <img src="https://github.com/suryanshsingh2001/Zemetric/blob/main/showcase/sendsms.png" alt="Send SMS" width="400"/><br/>
+         <p style="text-align:center;">Send SMS</p>
+      </td>
+   </tr>
+   <tr>
+      <td>
+         <img src="https://github.com/suryanshsingh2001/Zemetric/blob/main/showcase/violations.png" alt="Violation" width="400"/><br/>
+         <p style="text-align:center;">Violations Page</p>
+      </td>
+      <td>
+         <img src="https://github.com/suryanshsingh2001/Zemetric/blob/main/showcase/logs.png" alt="Logs Page" width="400"/><br/>
+         <p style="text-align:center;">Logs Page</p>
+      </td>
+   </tr>
+   <tr>
+      <td>
+         <img src="https://github.com/suryanshsingh2001/Zemetric/blob/main/showcase/anotherimage1.png" alt="Another Image 1" width="400"/><br/>
+         <p style="text-align:center;">Another Image 1</p>
+      </td>
+      <td>
+         <img src="https://github.com/suryanshsingh2001/Zemetric/blob/main/showcase/anotherimage2.png" alt="Another Image 2" width="400"/><br/>
+         <p style="text-align:center;">Another Image 2</p>
+      </td>
+   </tr>
+</table>
+
+
+
+
 ## Key Features  
 
 ### Functional Requirements  
