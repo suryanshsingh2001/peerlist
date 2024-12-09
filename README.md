@@ -12,32 +12,32 @@ This assignment involves creating a Next.js application for a form builder that 
 <table>
    <tr>
       <td>
-         <img src="https://github.com/suryanshsingh2001/Zemetric/blob/main/showcase/dashboard.png" alt="Dashboard" width="400"/><br/>
-         <p style="text-align:center;">Dashboard</p>
+         <img src="https://github.com/suryanshsingh2001/peerlist/blob/master/showcase/Home.png" alt="Create Form Page" width="400"/><br/>
+         <p style="text-align:center;">Form Designer</p>
       </td>
       <td>
-         <img src="https://github.com/suryanshsingh2001/Zemetric/blob/main/showcase/sendsms.png" alt="Send SMS" width="400"/><br/>
-         <p style="text-align:center;">Send SMS</p>
-      </td>
-   </tr>
-   <tr>
-      <td>
-         <img src="https://github.com/suryanshsingh2001/Zemetric/blob/main/showcase/violations.png" alt="Violation" width="400"/><br/>
-         <p style="text-align:center;">Violations Page</p>
-      </td>
-      <td>
-         <img src="https://github.com/suryanshsingh2001/Zemetric/blob/main/showcase/logs.png" alt="Logs Page" width="400"/><br/>
-         <p style="text-align:center;">Logs Page</p>
+         <img src="https://github.com/suryanshsingh2001/peerlist/blob/master/showcase/Home-Dropdown.png" alt="Create Form Dropdown" width="400"/><br/>
+         <p style="text-align:center;">Question Type Dropdown</p>
       </td>
    </tr>
    <tr>
       <td>
-         <img src="https://github.com/suryanshsingh2001/Zemetric/blob/main/showcase/anotherimage1.png" alt="Another Image 1" width="400"/><br/>
-         <p style="text-align:center;">Another Image 1</p>
+         <img src="https://github.com/suryanshsingh2001/peerlist/blob/master/showcase/Preview.png" alt="Form Preview" width="400"/><br/>
+         <p style="text-align:center;">Form Preview</p>
       </td>
       <td>
-         <img src="https://github.com/suryanshsingh2001/Zemetric/blob/main/showcase/anotherimage2.png" alt="Another Image 2" width="400"/><br/>
-         <p style="text-align:center;">Another Image 2</p>
+         <img src="https://github.com/suryanshsingh2001/peerlist/blob/master/showcase/Submission.png" alt="Form Submissions" width="400"/><br/>
+         <p style="text-align:center;">Form Submissions</p>
+      </td>
+   </tr>
+   <tr>
+      <td>
+         <img src="https://github.com/suryanshsingh2001/peerlist/blob/master/showcase/Submission2.png" alt="Form Submission Details" width="400"/><br/>
+         <p style="text-align:center;">Form Submission Details</p>
+      </td>
+      <td>
+         <img src="https://github.com/suryanshsingh2001/peerlist/blob/master/showcase/FormTemplates.png" alt="Form Templates" width="400"/><br/>
+         <p style="text-align:center;">Form Templates</p>
       </td>
    </tr>
 </table>
