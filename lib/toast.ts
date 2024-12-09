@@ -3,7 +3,7 @@ import { toast } from "sonner";
 interface Message {
   message: string;
   description?: string;
-  action ?:
+  action?:
     | {
         label: string;
         onClick: () => void;

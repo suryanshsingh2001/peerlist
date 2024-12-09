@@ -1,4 +1,3 @@
-// lib/formTemplates.ts
 import { FormTemplate, Question } from "@/lib/types";
 
 export const formTemplates: FormTemplate[] = [

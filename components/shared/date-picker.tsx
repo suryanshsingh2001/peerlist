@@ -44,7 +44,7 @@ export function DatePicker({ selectedDate, onDateChange }: DatePickerDemoProps) 
           onSelect={(selectedDate) => {
             if (selectedDate) {
               const formattedData = formatToDateString(selectedDate);
-              onDateChange(selectedDate.toString()); 
+              onDateChange(formattedData); 
             }
           }}
           initialFocus

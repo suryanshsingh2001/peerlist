@@ -8,7 +8,6 @@ export default function Home() {
     <Card className="container flex flex-col min-h-screen mx-auto w-full max-w-2xl rounded-none">
       <DesignFormHeader />
       <FormDesigner />
-
       <DesignFormFooter />
     </Card>
   );

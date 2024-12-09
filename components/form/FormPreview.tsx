@@ -14,7 +14,7 @@ import { Loader } from "lucide-react";
 import { AnimatedContainer } from "../shared/animated-container";
 import { DatePicker } from "../shared/date-picker";
 import useLocalStorage from "@/hooks/useLocalStorage";
-import { SuccessDialog } from "../shared/sucess-dialog";
+import { SuccessDialog } from "../shared/success-dialog";
 
 export default function FormPreview() {
   const router = useRouter();
@@ -54,19 +54,6 @@ export default function FormPreview() {
       console.log("Form saved successfully", response.data);
 
       addSubmission(submissionData);
-
-
-      // toastMessage({
-      //   message: "Form submitted",
-      //   description: `Your ${formTitle} has been submitted successfully`,
-      //   action: {
-      //     label: "View Submissions",
-      //     onClick: () => {
-      //       console.log("View submissions");
-      //       router.push("/submissions");
-      //     },
-      //   },
-      // });
 
       setSuccess(true);
       setAnswers({});

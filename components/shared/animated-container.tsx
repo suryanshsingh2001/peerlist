@@ -6,7 +6,14 @@ import { cn } from "@/lib/utils";
 interface AnimatedContainerProps {
   children: React.ReactNode;
   className?: string;
-  animation?: "fade" | "slide" | "scale" | "bounce" | "none" | "slideUp" | "slideDown";
+  animation?:
+    | "fade"
+    | "slide"
+    | "scale"
+    | "bounce"
+    | "none"
+    | "slideUp"
+    | "slideDown";
   delay?: number;
   duration?: number;
 }
@@ -40,14 +47,14 @@ export function AnimatedContainer({
       transition: { delay, duration },
     },
     slideUp: {
-        initial: { opacity: 0, y: 20 },
-        animate: { opacity: 1, y: 0 },
-        transition: { delay, duration },
+      initial: { opacity: 0, y: 20 },
+      animate: { opacity: 1, y: 0 },
+      transition: { delay, duration },
     },
     slideDown: {
-        initial: { opacity: 0, y: -20 },
-        animate: { opacity: 1, y: 0 },
-        transition: { delay, duration },
+      initial: { opacity: 0, y: -20 },
+      animate: { opacity: 1, y: 0 },
+      transition: { delay, duration },
     },
     none: {
       initial: {},

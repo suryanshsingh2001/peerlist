@@ -18,11 +18,6 @@ export const calculateProgress = (
   return Math.round((answeredQuestions / questions.length) * 100);
 };
 
-
-export const formatToDateString = (date: any) => {
-  //make sure it is in indian standard time MM-DD-YYYY
-
-  return format(date, "mm-dd-yyyy");
-
-
-}
+export const formatToDateString = (date: Date) => {
+  return format(date, "MM-dd-yyyy");
+};
