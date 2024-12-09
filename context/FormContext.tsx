@@ -16,6 +16,7 @@ interface FormContextProps {
   formSubmissions: FormSubmission[];
   setFormSubmissions: (submissions: FormSubmission[]) => void;
   addSubmission: (submission: FormSubmission) => void;
+  resetQuestions: () => void;
 }
 
 const FormContext = createContext<FormContextProps | undefined>(undefined);
@@ -48,10 +49,12 @@ export const FormProvider = ({ children }: FormProviderProps) => {
 
   const addSubmission = (submission: FormSubmission) => {
     setFormSubmissions((prevSubmissions) => [...prevSubmissions, submission]);
-  }
-  ;
+  };
 
-
+  const resetQuestions = () => {
+    setQuestions([]);
+    setFormTitle("");
+  };
 
   return (
     <FormContext.Provider
@@ -68,6 +71,7 @@ export const FormProvider = ({ children }: FormProviderProps) => {
         formSubmissions,
         setFormSubmissions,
         addSubmission,
+        resetQuestions,
       }}
     >
       {children}

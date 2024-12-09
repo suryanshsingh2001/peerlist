@@ -10,11 +10,12 @@ import {
 } from "@hello-pangea/dnd";
 import QuestionTypeSelect from "../questions/QuestionTypeSelect";
 import { Question } from "@/lib/types";
-import { Plus } from "lucide-react";
+import { Plus, RotateCw } from "lucide-react";
 import { AnimatedContainer } from "../shared/animated-container";
 import { QUESTION_TYPES, QuestionType } from "@/lib/questionTypes";
 import TemplateMenu from "../shared/template-menu";
 import { toastMessage } from "@/lib/toast";
+import ResetButton from "../shared/reset-button";
 
 export default function FormDesigner() {
   const { questions, setQuestions } = useFormContext();
@@ -68,7 +69,6 @@ export default function FormDesigner() {
     newQuestions.splice(index + 1, 0, duplicatedQuestion);
     setQuestions(newQuestions);
     toastMessage({ message: "Question duplicated" });
-
   };
 
   const handleDragEnd = (result: DropResult) => {
@@ -137,6 +137,9 @@ export default function FormDesigner() {
         </AnimatedContainer>
 
         <TemplateMenu />
+
+
+        <ResetButton />
       </>
     </div>
   );

@@ -10,7 +10,7 @@ Create a Next.js application for a form builder that allows users to create, pre
 - [ ] Add a title for the form.
 - [ ] Change the question type after adding a question by clicking on the question type icon and selecting a different type from the dropdown menu.
 - [ ] Reorder the questions in the form creation page using drag and drop functionality.
-- [ ] Publish the form or save it as a draft.
+- [ ] Publish or save the form as a draft.
 - [ ] Preview the created form and fill it out.
 - [ ] See the completeness percentage of the form while filling it out.
 - [ ] Submit the form and see a success message after submission.
@@ -21,12 +21,12 @@ Create a Next.js application for a form builder that allows users to create, pre
 - [ ] Follow best practices for web accessibility.
 - [ ] Include visually appealing elements with micro-interactions.
 - [ ] Maintain consistent application state throughout the user experience.
-- [ ] Allow abtraction to extend more question types in the future.
+- [ ] Design the system to be easily extendable for adding more question types in the future.
 
 ### Extra Features
-
-- [ ] Template forms that user can select and start from there instead of creating a form from scratch.
-- [ ] Feature to duplicate/delete a question in the form creation page.
+- [ ] Template forms that users can select to start from instead of creating a form from scratch.
+- [ ] Feature to duplicate or delete a question in the form creation page.
+- [ ] Reset button to clear all the form fields in the form creation page.
 - [ ] Sorting and searching options in the form submissions page.
 
 ### Tech Stack Used
@@ -43,7 +43,7 @@ Create a Next.js application for a form builder that allows users to create, pre
 - No support for word limits in text fields.
 - No support for conditional logic in form fields.
 - Form submissions are stored in local storage, not in a database.
-- Draft forms are saved in local storage and can be retrieved later.
+- Save as draft only triggers a response message and does not save the form.
 - Publishing a form redirects the user to the form preview page, but preview is also available in the form creation page.
 
 ## UI Breakdown
@@ -74,8 +74,6 @@ This page is where the user can view submitted forms in a table with details suc
 
 
 ## Getting Started
-
-
 
 1. Install dependencies:
    ```bash
