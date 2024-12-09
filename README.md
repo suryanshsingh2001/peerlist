@@ -7,6 +7,24 @@ This assignment involves creating a Next.js application for a form builder that 
 
 ---
 
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Screenshots](#screenshots)
+- [Key Features](#key-features)
+- [Extra Features](#extra-features)
+- [Tech Stack](#tech-stack)
+- [Design Philosophy](#design-philosophy)
+- [Business Logic](#business-logic)
+- [State Management](#state-management)
+- [Setup Instructions](#setup-instructions)
+- [Project Structure](#project-structure)
+- [Assumptions and Constraints](#assumptions-and-constraints)
+
+
+---
+
 ## Screenshots
 
 <table>
@@ -91,7 +109,9 @@ This assignment involves creating a Next.js application for a form builder that 
 
 ## Design Philosophy  
 
-The design follows a **minimalistic, centered layout** inspired by [peerlist.io](https://peerlist.io). Key principles include:  
+The design follows a **minimalistic, centered layout** inspired by [peerlist.io](https://peerlist.io).  
+
+Key principles include:  
 - **Colors:** Green as primary, white as secondary.  
 - **Typography:** Simple and readable.  
 - **Space:** Generous white space for clarity.  
