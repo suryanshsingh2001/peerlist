@@ -15,6 +15,7 @@ import { AnimatedContainer } from "../shared/animated-container";
 import { DatePicker } from "../shared/date-picker";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import { SuccessDialog } from "../shared/success-dialog";
+import { validateFields } from "@/lib/utils";
 
 export default function FormPreview() {
   const router = useRouter();
@@ -29,7 +30,6 @@ export default function FormPreview() {
   } = useFormContext();
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
-
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -78,6 +78,7 @@ export default function FormPreview() {
       case "short_answer":
         return (
           <Input
+            required
             name={question.id}
             value={answers[question.id] || ""}
             onChange={(e) => handleAnswerChange(question.id, e.target.value)}
@@ -86,6 +87,7 @@ export default function FormPreview() {
       case "long_answer":
         return (
           <Textarea
+            required
             name={question.id}
             value={answers[question.id] || ""}
             onChange={(e) => handleAnswerChange(question.id, e.target.value)}
@@ -94,6 +96,7 @@ export default function FormPreview() {
       case "single_select":
         return (
           <RadioGroup
+            required
             name={question.id}
             value={answers[question.id]}
             onValueChange={(value) => handleAnswerChange(question.id, value)}
@@ -109,6 +112,7 @@ export default function FormPreview() {
       case "number":
         return (
           <Input
+            required
             name={question.id}
             type="number"
             value={answers[question.id] || ""}
@@ -118,6 +122,7 @@ export default function FormPreview() {
       case "url":
         return (
           <Input
+            required
             name={question.id}
             type="url"
             value={answers[question.id] || ""}
@@ -142,8 +147,6 @@ export default function FormPreview() {
       <AnimatedContainer animation="scale" duration={0.3} className="">
         <div>
           <div className="p-6">
-            
-
             <form onSubmit={handleSubmit} className="space-y-8">
               {questions.map((question) => (
                 <div key={question.id} className="space-y-3">

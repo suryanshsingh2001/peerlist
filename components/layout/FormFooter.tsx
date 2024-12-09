@@ -6,12 +6,33 @@ import { Check, FileSliders } from "lucide-react";
 import { toastMessage } from "@/lib/toast";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { validateQuestion } from "@/lib/utils";
 
 export default function DesignFormFooter() {
   const router = useRouter();
-  const { questions, formTitle } = useFormContext();
+  const { questions, formTitle, setFormTitle } = useFormContext();
   const [completed, setCompleted] = useState(false);
   const hasQuestions = questions.length > 0;
+
+  const handleCompleted = () => {
+    if (formTitle === "") {
+      setFormTitle("Untitled Form");
+    }
+
+    if(!validateQuestion(questions)) {
+      toastMessage({
+        message: "Please fill out all questions",
+        description: "All questions must have a title",
+      });
+      return;
+    }
+    setCompleted(true);
+    router.push("/preview");
+    toastMessage({
+      message: `${formTitle ? formTitle : "Form"} published`,
+      description: "Your form has been published",
+    });
+  };
 
   return (
     <>
@@ -34,12 +55,7 @@ export default function DesignFormFooter() {
         <Button
           size={"sm"}
           onClick={() => {
-            setCompleted(true);
-            router.push("/preview");
-            toastMessage({
-              message: `${formTitle ? formTitle : "Form"} published`,
-              description: "Your form has been published",
-            });
+            handleCompleted();
           }}
           className="transition-all duration-300 hover:scale-105 active:scale-95"
           disabled={!hasQuestions || completed}

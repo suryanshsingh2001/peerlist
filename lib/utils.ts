@@ -21,3 +21,11 @@ export const calculateProgress = (
 export const formatToDateString = (date: Date) => {
   return format(date, "MM-dd-yyyy");
 };
+
+export const validateFields = (fields: Record<string, string>) => {
+  return Object.keys(fields).every((key) => fields[key].trim() !== "");
+}
+
+export const validateQuestion = (questions: Question[]): boolean => {
+  return questions.every((question) => question.question.trim() !== "");
+}
