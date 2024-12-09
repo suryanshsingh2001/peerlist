@@ -2,12 +2,13 @@
 # Peerlist Frontend Developer Assignment
 
 ## Introduction  
-This assignment involves creating a Next.js application for a form builder that allows users to create, preview, fill out, and submit forms. The application includes features like form creation, question types, form preview, form submissions, and more.
+This assignment involves creating a Next.js application for a form builder that allows users to create, preview, fill out, and submit forms.
+
+
+
 
 
 ---
-
-
 ## Table of Contents
 
 - [Introduction](#introduction)
